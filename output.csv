@@ -1,0 +1,169 @@
+|flag_name|NAME|HEX|Red|Green|Blue|Cyan|Magenta|Yellow|Black|Marker|Swatch
+0|abrosexual|faded pink|#de9dac|222|157|172|0.0%|29.28%|22.52%|12.94%||
+1|abrosexual|dark pink|#cb416b|203|65|107|0.0%|67.98%|47.29%|20.39%||
+2|abrosexual|pale turquoise|#a5fbd5|165|251|213|34.26%|0.0%|15.14%|1.57%||
+3|abrosexual|soft green|#6fc276|111|194|118|42.78%|0.0%|39.18%|23.92%||
+0|agender|light grey green|#b7e1a1|183|225|161|18.67%|0.0%|28.44%|11.76%||
+1|agender|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+0|androgynous|grey|#929591|146|149|145|2.01%|0.0%|2.68%|41.57%||
+1|androgynous|dark periwinkle|#665fd1|102|95|209|51.2%|54.55%|0.0%|18.04%||
+0|androphilia|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+1|androphilia|silver|#c5c9c7|197|201|199|1.99%|0.0%|1.0%|21.18%||
+2|androphilia|black|#000000|0|0|0|0%|0%|0%|100%||
+0|aromantic|pale grey|#fdfdfe|253|253|254|0.39%|0.39%|0.0%|0.39%||
+1|aromantic|greyish|#a8a495|168|164|149|0.0%|2.38%|11.31%|34.12%||
+2|aromantic|pale olive green|#b1d27b|177|210|123|15.71%|0.0%|41.43%|17.65%||
+3|aromantic|medium green|#39ad48|57|173|72|67.05%|0.0%|58.38%|32.16%||
+0|asexual|darkish purple|#751973|117|25|115|0.0%|78.63%|1.71%|54.12%||
+1|asexual|pale grey|#fdfdfe|253|253|254|0.39%|0.39%|0.0%|0.39%||
+2|asexual|cool grey|#95a3a6|149|163|166|10.24%|1.81%|0.0%|34.9%||
+0|autosexual|light blue|#95d0fc|149|208|252|40.87%|17.46%|0.0%|1.18%||
+0|bear|black|#000000|0|0|0|0%|0%|0%|100%||
+1|bear|gunmetal|#536267|83|98|103|19.42%|4.85%|0.0%|59.61%||
+2|bear|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+3|bear|pale peach|#ffe5ad|255|229|173|0.0%|10.2%|32.16%|0.0%||
+4|bear|brown|#653700|101|55|0|0.0%|45.54%|100.0%|60.39%||
+5|bear|sand yellow|#fce166|252|225|102|0.0%|10.71%|59.52%|1.18%||
+6|bear|browny orange|#ca6b02|202|107|2|0.0%|47.03%|99.01%|20.78%||
+0|bigender|light lavender|#dfc5fe|223|197|254|12.2%|22.44%|0.0%|0.39%||
+1|bigender|dull pink|#d5869d|213|134|157|0.0%|37.09%|26.29%|16.47%||
+2|bigender|faded blue|#658cbb|101|140|187|45.99%|25.13%|0.0%|26.67%||
+3|bigender|light grey blue|#9dbcd4|157|188|212|25.94%|11.32%|0.0%|16.86%||
+4|bigender|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+5|bigender|soft pink|#fdb0c0|253|176|192|0.0%|30.43%|24.11%|0.78%||
+6|bigender|light violet|#d6b4fc|214|180|252|15.08%|28.57%|0.0%|1.18%||
+0|bisexual|dark hot pink|#d90166|217|1|102|0.0%|99.54%|53.0%|14.9%||
+1|bisexual|sapphire|#2138ab|33|56|171|80.7%|67.25%|0.0%|32.94%||
+0|butch|light blue grey|#b7c9e2|183|201|226|19.03%|11.06%|0.0%|11.37%||
+1|butch|bluey grey|#89a0b0|137|160|176|22.16%|9.09%|0.0%|30.98%||
+2|butch|indigo|#380282|56|2|130|56.92%|98.46%|0.0%|49.02%||
+3|butch|dark grey blue|#29465b|41|70|91|54.95%|23.08%|0.0%|64.31%||
+4|butch|very light pink|#fff4f2|255|244|242|0.0%|4.31%|5.1%|0.0%||
+5|butch|light indigo|#6d5acf|109|90|207|47.34%|56.52%|0.0%|18.82%||
+0|demiboy|silver|#c5c9c7|197|201|199|1.99%|0.0%|1.0%|21.18%||
+1|demiboy|light blue|#95d0fc|149|208|252|40.87%|17.46%|0.0%|1.18%||
+2|demiboy|medium grey|#7d7f7c|125|127|124|1.57%|0.0%|2.36%|50.2%||
+0|demigirl|light grey|#d8dcd6|216|220|214|1.82%|0.0%|2.73%|13.73%||
+1|demigirl|medium grey|#7d7f7c|125|127|124|1.57%|0.0%|2.36%|50.2%||
+2|demigirl|powder pink|#ffb2d0|255|178|208|0.0%|30.2%|18.43%|0.0%||
+0|demisexual|light grey|#d8dcd6|216|220|214|1.82%|0.0%|2.73%|13.73%||
+1|demisexual|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+2|demisexual|very dark purple|#2a0134|42|1|52|19.23%|98.08%|0.0%|79.61%||
+0|gay|dandelion|#fedf08|254|223|8|0.0%|12.2%|96.85%|0.39%||
+1|gay|red|#e50000|229|0|0|0.0%|100.0%|100.0%|10.2%||
+2|gay|darkish purple|#751973|117|25|115|0.0%|78.63%|1.71%|54.12%||
+3|gay|emerald green|#028f1e|2|143|30|98.6%|0.0%|79.02%|43.92%||
+4|gay|tangerine|#ff9408|255|148|8|0.0%|41.96%|96.86%|0.0%||
+0|genderfluid|pale grey|#fdfdfe|253|253|254|0.39%|0.39%|0.0%|0.39%||
+1|genderfluid|black|#000000|0|0|0|0%|0%|0%|100%||
+2|genderfluid|carnation pink|#ff7fa7|255|127|167|0.0%|50.2%|34.51%|0.0%||
+3|genderfluid|vibrant purple|#ad03de|173|3|222|22.07%|98.65%|0.0%|12.94%||
+0|genderqueer|pale purple|#b790d4|183|144|212|13.68%|32.08%|0.0%|16.86%||
+1|genderqueer|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+0|gynephilia|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+1|gynephilia|black|#000000|0|0|0|0%|0%|0%|100%||
+2|gynephilia|strong pink|#ff0789|255|7|137|0.0%|97.25%|46.27%|0.0%||
+0|intersex|sunflower yellow|#ffda03|255|218|3|0.0%|14.51%|98.82%|0.0%||
+0|lesbian_wlw|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+1|lesbian_wlw|pastel orange|#ff964f|255|150|79|0.0%|41.18%|69.02%|0.0%||
+2|lesbian_wlw|pale magenta|#d767ad|215|103|173|0.0%|52.09%|19.53%|15.69%||
+3|lesbian_wlw|deep magenta|#a0025c|160|2|92|0.0%|98.75%|42.5%|37.25%||
+4|lesbian_wlw|tomato red|#ec2d01|236|45|1|0.0%|80.93%|99.58%|7.45%||
+5|lesbian_wlw|tomato red|#ec2d01|236|45|1|0.0%|80.93%|99.58%|7.45%||
+0|lesbian(7-stripe)|rouge|#ab1239|171|18|57|0.0%|89.47%|66.67%|32.94%||
+1|lesbian(7-stripe)|purplish pink|#ce5dae|206|93|174|0.0%|54.85%|15.53%|19.22%||
+0|lesbian(labrys)|purple|#7e1e9c|126|30|156|19.23%|80.77%|0.0%|38.82%||
+1|lesbian(labrys)|black|#000000|0|0|0|0%|0%|0%|100%||
+2|lesbian(labrys)|pale grey|#fdfdfe|253|253|254|0.39%|0.39%|0.0%|0.39%||
+3|lesbian(labrys)|charcoal grey|#3c4142|60|65|66|9.09%|1.52%|0.0%|74.12%||
+0|lipstick-femme|brick red|#8f1402|143|20|2|0.0%|86.01%|98.6%|43.92%||
+1|lipstick-femme|dark coral|#cf524e|207|82|78|0.0%|60.39%|62.32%|18.82%||
+2|lipstick-femme|powder pink|#ffb2d0|255|178|208|0.0%|30.2%|18.43%|0.0%||
+3|lipstick-femme|deep magenta|#a0025c|160|2|92|0.0%|98.75%|42.5%|37.25%||
+4|lipstick-femme|very light pink|#fff4f2|255|244|242|0.0%|4.31%|5.1%|0.0%||
+5|lipstick-femme|pale magenta|#d767ad|215|103|173|0.0%|52.09%|19.53%|15.69%||
+6|lipstick-femme|light plum|#9d5783|157|87|131|0.0%|44.59%|16.56%|38.43%||
+0|lithromantic|greyish|#a8a495|168|164|149|0.0%|2.38%|11.31%|34.12%||
+1|lithromantic|turtle green|#75b84f|117|184|79|36.41%|0.0%|57.07%|27.84%||
+0|mlm|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+1|mlm|light teal|#90e4c1|144|228|193|36.84%|0.0%|15.35%|10.59%||
+2|mlm|sky blue|#75bbfd|117|187|253|53.75%|26.09%|0.0%|0.78%||
+3|mlm|indigo|#380282|56|2|130|56.92%|98.46%|0.0%|49.02%||
+0|mlm(7-stripe)|seafoam blue|#78d1b6|120|209|182|42.58%|0.0%|12.92%|18.04%||
+1|mlm(7-stripe)|pale grey|#fdfdfe|253|253|254|0.39%|0.39%|0.0%|0.39%||
+2|mlm(7-stripe)|sky blue|#75bbfd|117|187|253|53.75%|26.09%|0.0%|0.78%||
+3|mlm(7-stripe)|greeny blue|#42b395|66|179|149|63.13%|0.0%|16.76%|29.8%||
+4|mlm(7-stripe)|water blue|#0e87cc|14|135|204|93.14%|33.82%|0.0%|20.0%||
+5|mlm(7-stripe)|blue green|#137e6d|19|126|109|84.92%|0.0%|13.49%|50.59%||
+0|neutrois|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+1|neutrois|grass green|#3f9b0b|63|155|11|59.35%|0.0%|92.9%|39.22%||
+0|nonbinary|pale grey|#fdfdfe|253|253|254|0.39%|0.39%|0.0%|0.39%||
+1|nonbinary|sunshine yellow|#fffd37|255|253|55|0.0%|0.78%|78.43%|0.0%||
+2|nonbinary|black|#000000|0|0|0|0%|0%|0%|100%||
+0|omnisexual|cornflower|#6a79f7|106|121|247|57.09%|51.01%|0.0%|3.14%||
+1|omnisexual|periwinkle blue|#8f99fb|143|153|251|43.03%|39.04%|0.0%|1.57%||
+2|omnisexual|bubble gum pink|#ff69af|255|105|175|0.0%|58.82%|31.37%|0.0%||
+3|omnisexual|dark violet|#34013f|52|1|63|17.46%|98.41%|0.0%|75.29%||
+0|original-pride|tangerine|#ff9408|255|148|8|0.0%|41.96%|96.86%|0.0%||
+1|original-pride|bright yellow|#fffd01|255|253|1|0.0%|0.78%|99.61%|0.0%||
+2|original-pride|fire engine red|#fe0002|254|0|2|0.0%|100.0%|99.21%|0.39%||
+3|original-pride|indigo|#380282|56|2|130|56.92%|98.46%|0.0%|49.02%||
+4|original-pride|true green|#089404|8|148|4|94.59%|0.0%|97.3%|41.96%||
+5|original-pride|turquoise blue|#06b1c4|6|177|196|96.94%|9.69%|0.0%|23.14%||
+6|original-pride|barney purple|#a00498|160|4|152|0.0%|97.5%|5.0%|37.25%||
+0|pansexual|sunflower yellow|#ffda03|255|218|3|0.0%|14.51%|98.82%|0.0%||
+1|pansexual|strong pink|#ff0789|255|7|137|0.0%|97.25%|46.27%|0.0%||
+0|polyamory|black|#000000|0|0|0|0%|0%|0%|100%||
+1|polyamory|primary blue|#0804f9|8|4|249|96.79%|98.39%|0.0%|2.35%||
+2|polyamory|fire engine red|#fe0002|254|0|2|0.0%|100.0%|99.21%|0.39%||
+0|polysexual|azure|#069af3|6|154|243|97.53%|36.63%|0.0%|4.71%||
+1|polysexual|hot magenta|#f504c9|245|4|201|0.0%|98.37%|17.96%|3.92%||
+0|pride-poc-inclusive|medium brown|#7f5112|127|81|18|0.0%|36.22%|85.83%|50.2%||
+1|pride-poc-inclusive|tangerine|#ff9408|255|148|8|0.0%|41.96%|96.86%|0.0%||
+2|pride-poc-inclusive|dandelion|#fedf08|254|223|8|0.0%|12.2%|96.85%|0.39%||
+3|pride-poc-inclusive|true green|#089404|8|148|4|94.59%|0.0%|97.3%|41.96%||
+4|pride-poc-inclusive|sapphire|#2138ab|33|56|171|80.7%|67.25%|0.0%|32.94%||
+5|pride-poc-inclusive|fire engine red|#fe0002|254|0|2|0.0%|100.0%|99.21%|0.39%||
+6|pride-poc-inclusive|black|#000000|0|0|0|0%|0%|0%|100%||
+0|progress|royal|#0c1793|12|23|147|91.84%|84.35%|0.0%|42.35%||
+1|progress|tangerine|#ff9408|255|148|8|0.0%|41.96%|96.86%|0.0%||
+2|progress|red|#e50000|229|0|0|0.0%|100.0%|100.0%|10.2%||
+3|progress|darkish purple|#751973|117|25|115|0.0%|78.63%|1.71%|54.12%||
+4|progress|green|#15b01a|21|176|26|88.07%|0.0%|85.23%|30.98%||
+5|progress|neon yellow|#cfff04|207|255|4|18.82%|0.0%|98.43%|0.0%||
+6|progress|mud brown|#60460f|96|70|15|0.0%|27.08%|84.38%|62.35%||
+7|progress|black|#000000|0|0|0|0%|0%|0%|100%||
+8|progress|lightblue|#7bc8f6|123|200|246|50.0%|18.7%|0.0%|3.53%||
+9|progress|powder pink|#ffb2d0|255|178|208|0.0%|30.2%|18.43%|0.0%||
+0|Qpoc|almost black|#070d0d|7|13|13|46.15%|0.0%|0.0%|94.9%||
+1|Qpoc|dull orange|#d8863b|216|134|59|0.0%|37.96%|72.69%|15.29%||
+2|Qpoc|warm purple|#952e8f|149|46|143|0.0%|69.13%|4.03%|41.57%||
+3|Qpoc|tomato|#ef4026|239|64|38|0.0%|73.22%|84.1%|6.27%||
+4|Qpoc|maize|#f4d054|244|208|84|0.0%|14.75%|65.57%|4.31%||
+5|Qpoc|denim blue|#3b5b92|59|91|146|59.59%|37.67%|0.0%|42.75%||
+6|Qpoc|red brown|#8b2e16|139|46|22|0.0%|66.91%|84.17%|45.49%||
+7|Qpoc|emerald|#01a049|1|160|73|99.38%|0.0%|54.38%|37.25%||
+8|Qpoc|chocolate|#3d1c02|61|28|2|0.0%|54.1%|96.72%|76.08%||
+9|Qpoc|almost black|#070d0d|7|13|13|46.15%|0.0%|0.0%|94.9%||
+10|Qpoc|very dark brown|#1d0200|29|2|0|0.0%|93.1%|100.0%|88.63%||
+11|Qpoc|almost black|#070d0d|7|13|13|46.15%|0.0%|0.0%|94.9%||
+0|quiromantic|light grey|#d8dcd6|216|220|214|1.82%|0.0%|2.73%|13.73%||
+1|quiromantic|kiwi green|#8ee53f|142|229|63|37.99%|0.0%|72.49%|10.2%||
+2|quiromantic|lightblue|#7bc8f6|123|200|246|50.0%|18.7%|0.0%|3.53%||
+0|skoliosexual|bright yellow|#fffd01|255|253|1|0.0%|0.78%|99.61%|0.0%||
+1|skoliosexual|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+2|skoliosexual|true green|#089404|8|148|4|94.59%|0.0%|97.3%|41.96%||
+0|transgender|soft pink|#fdb0c0|253|176|192|0.0%|30.43%|24.11%|0.78%||
+1|transgender|sky blue|#75bbfd|117|187|253|53.75%|26.09%|0.0%|0.78%||
+0|trigender|bubblegum pink|#fe83cc|254|131|204|0.0%|48.43%|19.69%|0.39%||
+1|trigender|periwinkle|#8e82fe|142|130|254|44.09%|48.82%|0.0%|0.39%||
+0|twink|light lavendar|#efc0fe|239|192|254|5.91%|24.41%|0.0%|0.39%||
+1|twink|butter|#ffff81|255|255|129|0.0%|0.0%|49.41%|0.0%||
+2|twink|white|#ffffff|255|255|255|0.0%|0.0%|0.0%|0.0%||
+0|twospirit|darkish purple|#751973|117|25|115|0.0%|78.63%|1.71%|54.12%||
+1|twospirit|red|#e50000|229|0|0|0.0%|100.0%|100.0%|10.2%||
+2|twospirit|tangerine|#ff9408|255|148|8|0.0%|41.96%|96.86%|0.0%||
+3|twospirit|dandelion|#fedf08|254|223|8|0.0%|12.2%|96.85%|0.39%||
+4|twospirit|electric blue|#0652ff|6|82|255|97.65%|67.84%|0.0%|0.0%||
+5|twospirit|emerald green|#028f1e|2|143|30|98.6%|0.0%|79.02%|43.92%||
+6|twospirit|pale grey|#fdfdfe|253|253|254|0.39%|0.39%|0.0%|0.39%||
