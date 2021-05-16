@@ -21,6 +21,32 @@ palettes = {'css3': {'hex_to_name': webcolors.CSS3_HEX_TO_NAMES, 'name_to_hex': 
     'fawn': '#cfaf7b', 'muted blue': '#3b719f', 'pale rose': '#fdc1c5', 'dark mint green': '#20c073', 'amethyst': '#9b5fc0', 'blue/green': '#0f9b8e', 'chestnut': '#742802', 'sick green': '#9db92c', 'pea': '#a4bf20', 'rusty orange': '#cd5909', 'stone': '#ada587', 'rose red': '#be013c', 'pale aqua': '#b8ffeb', 'deep orange': '#dc4d01', 'earth': '#a2653e', 'mossy green': '#638b27', 'grassy green': '#419c03', 'pale lime green': '#b1ff65', 'light grey blue': '#9dbcd4', 'pale grey': '#fdfdfe', 'asparagus': '#77ab56', 'blueberry': '#464196', 'purple red': '#990147', 'pale lime': '#befd73', 'greenish teal': '#32bf84', 'caramel': '#af6f09', 'deep magenta': '#a0025c', 'light peach': '#ffd8b1', 'milk chocolate': '#7f4e1e', 'ocher': '#bf9b0c', 'off green': '#6ba353', 'purply pink': '#f075e6', 'lightblue': '#7bc8f6', 'dusky blue': '#475f94', 'golden': '#f5bf03', 'light beige': '#fffeb6', 'butter yellow': '#fffd74', 'dusky purple': '#895b7b', 'french blue': '#436bad', 'ugly yellow': '#d0c101', 'greeny yellow': '#c6f808', 'orangish red': '#f43605', 'shamrock green': '#02c14d', 'orangish brown': '#b25f03', 'tree green': '#2a7e19', 'deep violet': '#490648', 'gunmetal': '#536267', 'blue/purple': '#5a06ef', 'cherry': '#cf0234', 'sandy brown': '#c4a661', 'warm grey': '#978a84', 'dark indigo': '#1f0954', 'midnight': '#03012d', 'bluey green': '#2bb179', 'grey pink': '#c3909b', 'soft purple': '#a66fb5', 'blood': '#770001', 'brown red': '#922b05', 'medium grey': '#7d7f7c', 'berry': '#990f4b', 'poo': '#8f7303', 'purpley pink': '#c83cb9', 'light salmon': '#fea993', 'snot': '#acbb0d', 'easter purple': '#c071fe', 'light yellow green': '#ccfd7f', 'dark navy blue': '#00022e', 'drab': '#828344', 'light rose': '#ffc5cb', 'rouge': '#ab1239', 'purplish red': '#b0054b', 'slime green': '#99cc04', 'baby poop': '#937c00', 'irish green': '#019529', 'pink/purple': '#ef1de7', 'dark navy': '#000435', 'greeny blue': '#42b395', 'light plum': '#9d5783', 'pinkish grey': '#c8aca9', 'dirty orange': '#c87606', 'rust red': '#aa2704', 'pale lilac': '#e4cbff', 'orangey red': '#fa4224', 'primary blue': '#0804f9', 'kermit green': '#5cb200', 'brownish purple': '#76424e', 'murky green': '#6c7a0e', 'wheat': '#fbdd7e', 'very dark purple': '#2a0134', 'bottle green': '#044a05', 'watermelon': '#fd4659', 'deep sky blue': '#0d75f8', 'fire engine red': '#fe0002', 'yellow ochre': '#cb9d06', 'pumpkin orange': '#fb7d07', 'pale olive': '#b9cc81', 'light lilac': '#edc8ff', 'lightish green': '#61e160', 'carolina blue': '#8ab8fe', 'mulberry': '#920a4e', 'shocking pink': '#fe02a2', 'auburn': '#9a3001', 'bright lime green': '#65fe08', 'celadon': '#befdb7', 'pinkish brown': '#b17261', 'poo brown': '#885f01', 'bright sky blue': '#02ccfe', 'celery': '#c1fd95', 'dirt brown': '#836539', 'strawberry': '#fb2943', 'dark lime': '#84b701', 'copper': '#b66325', 'medium brown': '#7f5112', 'muted green': '#5fa052', 'robins egg': '#6dedfd', 'bright aqua': '#0bf9ea', 'bright lavender': '#c760ff', 'ivory': '#ffffcb', 'very light purple': '#f6cefc', 'light navy': '#155084', 'pink red': '#f5054f', 'olive brown': '#645403', 'poop brown': '#7a5901', 'mustard green': '#a8b504', 'ocean green': '#3d9973', 'very dark blue': '#000133', 'dusty green': '#76a973', 'light navy blue': '#2e5a88', 'minty green': '#0bf77d', 'adobe': '#bd6c48', 'barney': '#ac1db8', 'jade green': '#2baf6a', 'bright light blue': '#26f7fd', 'light lime': '#aefd6c', 'dark khaki': '#9b8f55', 'orange yellow': '#ffad01', 'ocre': '#c69c04', 'maize': '#f4d054', 'faded pink': '#de9dac', 'british racing green': '#05480d', 'sandstone': '#c9ae74', 'mud brown': '#60460f', 'light sea green': '#98f6b0', 'robin egg blue': '#8af1fe', 'aqua marine': '#2ee8bb', 'dark sea green': '#11875d', 'soft pink': '#fdb0c0', 'orangey brown': '#b16002', 'cherry red': '#f7022a', 'burnt yellow': '#d5ab09', 'brownish grey': '#86775f', 'camel': '#c69f59', 'purplish grey': '#7a687f', 'marine': '#042e60', 'greyish pink': '#c88d94', 'pale turquoise': '#a5fbd5', 'pastel yellow': '#fffe71', 'bluey purple': '#6241c7', 'canary yellow': '#fffe40', 'faded red': '#d3494e', 'sepia': '#985e2b', 'coffee': '#a6814c', 'bright magenta': '#ff08e8', 'mocha': '#9d7651', 'ecru': '#feffca', 'purpleish': '#98568d', 'cranberry': '#9e003a', 'darkish green': '#287c37', 'brown orange': '#b96902', 'dusky rose': '#ba6873', 'melon': '#ff7855', 'sickly green': '#94b21c', 'silver': '#c5c9c7', 'purply blue': '#661aee', 'purpleish blue': '#6140ef', 'hospital green': '#9be5aa', 'shit brown': '#7b5804', 'mid blue': '#276ab3', 'amber': '#feb308', 'easter green': '#8cfd7e', 'soft blue': '#6488ea', 'cerulean blue': '#056eee', 'golden brown': '#b27a01', 'bright turquoise': '#0ffef9', 'red pink': '#fa2a55', 'red purple': '#820747', 'greyish brown': '#7a6a4f', 'vermillion': '#f4320c', 'russet': '#a13905', 'steel grey': '#6f828a', 'lighter purple': '#a55af4', 'bright violet': '#ad0afd', 'prussian blue': '#004577', 'slate green': '#658d6d', 'dirty pink': '#ca7b80', 'dark blue green': '#005249', 'pine': '#2b5d34', 'yellowy green': '#bff128', 'dark gold': '#b59410', 'bluish': '#2976bb', 'darkish blue': '#014182', 'dull red': '#bb3f3f', 'pinky red': '#fc2647', 'bronze': '#a87900', 'pale teal': '#82cbb2', 'military green': '#667c3e', 'barbie pink': '#fe46a5', 'bubblegum pink': '#fe83cc', 'pea soup green': '#94a617', 'dark mustard': '#a88905', 'shit': '#7f5f00', 'medium purple': '#9e43a2', 'very dark green': '#062e03', 'dirt': '#8a6e45', 'dusky pink': '#cc7a8b', 'red violet': '#9e0168', 'lemon yellow': '#fdff38', 'pistachio': '#c0fa8b', 'dull yellow': '#eedc5b', 'dark lime green': '#7ebd01', 'denim blue': '#3b5b92', 'teal blue': '#01889f', 'lightish blue': '#3d7afd', 'purpley blue': '#5f34e7', 'light indigo': '#6d5acf', 'swamp green': '#748500', 'brown green': '#706c11', 'dark maroon': '#3c0008', 'hot purple': '#cb00f5', 'dark forest green': '#002d04', 'faded blue': '#658cbb', 'drab green': '#749551', 'light lime green': '#b9ff66', 'snot green': '#9dc100', 'yellowish': '#faee66', 'light blue green': '#7efbb3', 'bordeaux': '#7b002c', 'light mauve': '#c292a1', 'ocean': '#017b92', 'marigold': '#fcc006', 'muddy green': '#657432', 'dull orange': '#d8863b', 'steel': '#738595', 'electric purple': '#aa23ff', 'fluorescent green': '#08ff08', 'yellowish brown': '#9b7a01', 'blush': '#f29e8e', 'soft green': '#6fc276', 'bright orange': '#ff5b00', 'lemon': '#fdff52', 'purple grey': '#866f85', 'acid green': '#8ffe09', 'pale lavender': '#eecffe', 'violet blue': '#510ac9', 'light forest green': '#4f9153', 'burnt red': '#9f2305', 'khaki green': '#728639', 'cerise': '#de0c62', 'faded purple': '#916e99', 'apricot': '#ffb16d', 'dark olive green': '#3c4d03', 'grey brown': '#7f7053', 'green grey': '#77926f', 'true blue': '#010fcc', 'pale violet': '#ceaefa', 'periwinkle blue': '#8f99fb', 'light sky blue': '#c6fcff', 'blurple': '#5539cc', 'green brown': '#544e03', 'bluegreen': '#017a79', 'bright teal': '#01f9c6', 'brownish yellow': '#c9b003', 'pea soup': '#929901', 'forest': '#0b5509', 'barney purple': '#a00498', 'ultramarine': '#2000b1', 'purplish': '#94568c', 'puke yellow': '#c2be0e', 'bluish grey': '#748b97', 'dark periwinkle': '#665fd1', 'dark lilac': '#9c6da5', 'reddish': '#c44240', 'light maroon': '#a24857', 'dusty purple': '#825f87', 'terra cotta': '#c9643b', 'avocado': '#90b134', 'marine blue': '#01386a', 'teal green': '#25a36f', 'slate grey': '#59656d', 'lighter green': '#75fd63', 'electric green': '#21fc0d', 'dusty blue': '#5a86ad', 'golden yellow': '#fec615', 'bright yellow': '#fffd01', 'light lavender': '#dfc5fe', 'umber': '#b26400', 'poop': '#7f5e00', 'dark peach': '#de7e5d', 'jungle green': '#048243', 'eggshell': '#ffffd4', 'denim': '#3b638c', 'yellow brown': '#b79400', 'dull purple': '#84597e', 'chocolate brown': '#411900', 'wine red': '#7b0323', 'neon blue': '#04d9ff', 'dirty green': '#667e2c', 'light tan': '#fbeeac', 'ice blue': '#d7fffe', 'cadet blue': '#4e7496', 'dark mauve': '#874c62', 'very light blue': '#d5ffff', 'grey purple': '#826d8c', 'pastel pink': '#ffbacd', 'very light green': '#d1ffbd', 'dark sky blue': '#448ee4', 'evergreen': '#05472a', 'dull pink': '#d5869d', 'aubergine': '#3d0734', 'mahogany': '#4a0100', 'reddish orange': '#f8481c', 'deep green': '#02590f', 'vomit green': '#89a203', 'purple pink': '#e03fd8', 'dusty pink': '#d58a94', 'faded green': '#7bb274', 'camo green': '#526525', 'pinky purple': '#c94cbe', 'pink purple': '#db4bda', 'brownish red': '#9e3623', 'dark rose': '#b5485d', 'mud': '#735c12', 'brownish': '#9c6d57', 'emerald green': '#028f1e', 'pale brown': '#b1916e', 'dull blue': '#49759c', 'burnt umber': '#a0450e', 'medium green': '#39ad48', 'clay': '#b66a50', 'light aqua': '#8cffdb', 'light olive green': '#a4be5c', 'brownish orange': '#cb7723', 'dark aqua': '#05696b', 'purplish pink': '#ce5dae', 'dark salmon': '#c85a53', 'greenish grey': '#96ae8d', 'jade': '#1fa774', 'ugly green': '#7a9703', 'dark beige': '#ac9362', 'emerald': '#01a049', 'pale red': '#d9544d', 'light magenta': '#fa5ff7', 'sky': '#82cafc', 'light cyan': '#acfffc', 'yellow orange': '#fcb001', 'reddish purple': '#910951', 'reddish pink': '#fe2c54', 'orchid': '#c875c4', 'dirty yellow': '#cdc50a', 'orange red': '#fd411e', 'deep red': '#9a0200', 'orange brown': '#be6400', 'cobalt blue': '#030aa7', 'neon pink': '#fe019a', 'rose pink': '#f7879a', 'greyish purple': '#887191', 'raspberry': '#b00149', 'aqua green': '#12e193', 'salmon pink': '#fe7b7c', 'tangerine': '#ff9408', 'brownish green': '#6a6e09', 'red brown': '#8b2e16', 'greenish brown': '#696112', 'pumpkin': '#e17701', 'pine green': '#0a481e', 'charcoal': '#343837', 'baby pink': '#ffb7ce', 'cornflower': '#6a79f7', 'blue violet': '#5d06e9', 'chocolate': '#3d1c02', 'greyish green': '#82a67d', 'scarlet': '#be0119', 'green yellow': '#c9ff27', 'dark olive': '#373e02', 'sienna': '#a9561e', 'pastel purple': '#caa0ff', 'terracotta': '#ca6641', 'aqua blue': '#02d8e9', 'sage green': '#88b378', 'blood red': '#980002', 'deep pink': '#cb0162', 'grass': '#5cac2d', 'moss': '#769958',
     'pastel blue': '#a2bffe', 'bluish green': '#10a674', 'green blue': '#06b48b', 'dark tan': '#af884a', 'greenish blue': '#0b8b87', 'pale orange': '#ffa756', 'vomit': '#a2a415', 'forrest green': '#154406', 'dark lavender': '#856798', 'dark violet': '#34013f', 'purple blue': '#632de9', 'dark cyan': '#0a888a', 'olive drab': '#6f7632', 'pinkish': '#d46a7e', 'cobalt': '#1e488f', 'neon purple': '#bc13fe', 'light turquoise': '#7ef4cc', 'apple green': '#76cd26', 'dull green': '#74a662', 'wine': '#80013f', 'powder blue': '#b1d1fc', 'off white': '#ffffe4', 'electric blue': '#0652ff', 'dark turquoise': '#045c5a', 'blue purple': '#5729ce', 'azure': '#069af3', 'bright red': '#ff000d', 'pinkish red': '#f10c45', 'cornflower blue': '#5170d7', 'light olive': '#acbf69', 'grape': '#6c3461', 'greyish blue': '#5e819d', 'purplish blue': '#601ef9', 'yellowish green': '#b0dd16', 'greenish yellow': '#cdfd02', 'medium blue': '#2c6fbb', 'dusty rose': '#c0737a', 'light violet': '#d6b4fc', 'midnight blue': '#020035', 'bluish purple': '#703be7', 'red orange': '#fd3c06', 'dark magenta': '#960056', 'greenish': '#40a368', 'ocean blue': '#03719c', 'coral': '#fc5a50', 'cream': '#ffffc2', 'reddish brown': '#7f2b0a', 'burnt sienna': '#b04e0f', 'brick': '#a03623', 'sage': '#87ae73', 'grey green': '#789b73', 'white': '#ffffff', 'robins egg blue': '#98eff9', 'moss green': '#658b38', 'steel blue': '#5a7d9a', 'eggplant': '#380835', 'light yellow': '#fffe7a', 'leaf green': '#5ca904', 'light grey': '#d8dcd6', 'puke': '#a5a502', 'pinkish purple': '#d648d7', 'sea blue': '#047495', 'pale purple': '#b790d4', 'slate blue': '#5b7c99', 'blue grey': '#607c8e', 'hunter green': '#0b4008', 'fuchsia': '#ed0dd9', 'crimson': '#8c000f', 'pale yellow': '#ffff84', 'ochre': '#bf9005', 'mustard yellow': '#d2bd0a', 'light red': '#ff474c', 'cerulean': '#0485d1', 'pale pink': '#ffcfdc', 'deep blue': '#040273', 'rust': '#a83c09', 'light teal': '#90e4c1', 'slate': '#516572', 'goldenrod': '#fac205', 'dark yellow': '#d5b60a', 'dark grey': '#363737', 'army green': '#4b5d16', 'grey blue': '#6b8ba4', 'seafoam': '#80f9ad', 'puce': '#a57e52', 'spring green': '#a9f971', 'dark orange': '#c65102', 'sand': '#e2ca76', 'pastel green': '#b0ff9d', 'mint': '#9ffeb0', 'light orange': '#fdaa48', 'bright pink': '#fe01b1', 'chartreuse': '#c1f80a', 'deep purple': '#36013f', 'dark brown': '#341c02', 'taupe': '#b9a281', 'pea green': '#8eab12', 'puke green': '#9aae07', 'kelly green': '#02ab2e', 'seafoam green': '#7af9ab', 'blue green': '#137e6d', 'khaki': '#aaa662', 'burgundy': '#610023', 'dark teal': '#014d4e', 'brick red': '#8f1402', 'royal purple': '#4b006e', 'plum': '#580f41', 'mint green': '#8fff9f', 'gold': '#dbb40c', 'baby blue': '#a2cffe', 'yellow green': '#c0fb2d', 'bright purple': '#be03fd', 'dark red': '#840000', 'pale blue': '#d0fefe', 'grass green': '#3f9b0b', 'navy': '#01153e', 'aquamarine': '#04d8b2', 'burnt orange': '#c04e01', 'neon green': '#0cff0c', 'bright blue': '#0165fc', 'rose': '#cf6275', 'light pink': '#ffd1df', 'mustard': '#ceb301', 'indigo': '#380282', 'lime': '#aaff32', 'sea green': '#53fca1', 'periwinkle': '#8e82fe', 'dark pink': '#cb416b', 'olive green': '#677a04', 'peach': '#ffb07c', 'pale green': '#c7fdb5', 'light brown': '#ad8150', 'hot pink': '#ff028d', 'black': '#000000', 'lilac': '#cea2fd', 'navy blue': '#001146', 'royal blue': '#0504aa', 'beige': '#e6daa6', 'salmon': '#ff796c', 'olive': '#6e750e', 'maroon': '#650021', 'bright green': '#01ff07', 'dark purple': '#35063e', 'mauve': '#ae7181', 'forest green': '#06470c', 'aqua': '#13eac9', 'cyan': '#00ffff', 'tan': '#d1b26f', 'dark blue': '#00035b', 'lavender': '#c79fef', 'turquoise': '#06c2ac', 'dark green': '#033500', 'violet': '#9a0eea', 'light purple': '#bf77f6', 'lime green': '#89fe05', 'grey': '#929591', 'sky blue': '#75bbfd', 'yellow': '#ffff14', 'magenta': '#c20078', 'light green': '#96f97b', 'orange': '#f97306', 'teal': '#029386', 'light blue': '#95d0fc', 'red': '#e50000', 'brown': '#653700', 'pink': '#ff81c0', 'blue': '#0343df', 'green': '#15b01a', 'purple': '#7e1e9c'}}}
 
+basic_colors = {'css3': ['hotpink', 'red', 'orange', 'yellow', 'green', 'darkturquoise', 'darkblue', 'indigo', 'purple', 'black', 'saddlebrown', 'white', 'lightpink', 'skyblue'],
+ 'xkcd': ['bubblegum', 'red', 'tangerine', 'neon yellow', 'green', 'turquoise blue', 'royal', 'indigo', 'darkish purple', 'black', 'mud brown', 'white', 'soft pink', 'lightblue']}
+
+basic_flags ={'ally': 
+        {'css3': ['red', 'orange', 'yellow', 'green', 'darkblue', 'purple', 'black', 'white'], 
+        'xkcd': ['red', 'tangerine', 'neon yellow', 'green', 'royal', 'darkish purple', 'black', 'white']},
+    'basic': 
+        {'css3': ['red', 'orange', 'yellow', 'green', 'darkblue', 'purple'], 
+        'xkcd': ['red', 'tangerine', 'neon yellow', 'green', 'royal', 'darkish purple']},
+    'original-pride':
+        {'css3': ['hotpink', 'red', 'orange', 'yellow', 'green', 'darkturquoise', 'indigo', 'purple'],
+        'xkcd': ['bubblegum', 'red', 'tangerine', 'neon yellow', 'green', 'turquoise blue', 'indigo', 'darkish purple']},
+    'pride-poc-inclusive':
+        {'css3': ['black', 'saddlebrown', 'red', 'orange', 'yellow', 'green', 'darkblue', 'purple'],
+        'xkcd': ['black', 'mud brown', 'red', 'tangerine', 'neon yellow', 'green', 'royal', 'darkish purple']},
+    'progress':
+        {'css3': ['red', 'orange', 'yellow', 'green', 'darkblue','purple', 'black', 'saddlebrown', 'white', 'lightpink', 'skyblue'],
+        'xkcd': ['red', 'tangerine', 'neon yellow', 'green', 'royal', 'darkish purple', 'black', 'mud brown', 'white', 'soft pink', 'lightblue']},
+    'transgender':
+        {'css3': ['skyblue', 'lightpink', 'white'],
+        'xkcd': ['lightblue', 'soft pink', 'white']},
+    'twospirit': 
+        {'css3': ['red', 'orange', 'yellow', 'green', 'darkblue', 'purple', 'black', 'white'], 
+        'xkcd': ['red', 'tangerine', 'neon yellow', 'green', 'royal', 'darkish purple', 'black', 'white']}
+            }
+
 
 def value_sort(dct):
     return {k: v for k, v in sorted(dct.items(), key=lambda item: item[1], reverse=True)}
@@ -60,6 +86,16 @@ def closest_color(color, palette):
     smallest_distance = min(list(distances.values()))
     right_choice =[key for key, value in distances.items() if value == smallest_distance]
     return tuple(right_choice[0])
+
+def transcribe(colors_rgb, palette):
+    colors_hex = []
+    colors_names =[]
+    for color in colors_rgb:
+        _hex = webcolors.rgb_to_hex(color)
+        colors_hex.append(_hex)
+        colors_names.append(palettes[palette]['hex_to_name'][_hex])
+    return {'RGB':colors_rgb, 'hex':colors_hex, 'names':colors_names}
+
 
 class Flag:
     '''
@@ -127,7 +163,11 @@ class Flag:
             palette_choices = list(map(webcolors.hex_to_rgb, palettes[palette]['hex_to_name'].keys()))
             for color in self.base_colors:
                 conversion[palette][color] = closest_color(color, palette_choices)
-        self.palette_matrix = conversion
+        self.conversion_matrix = conversion
+        palette_matrix = {}
+        for palette in conversion.keys():
+            palette_matrix[palette] = transcribe(list(conversion[palette].values()), palette)
+        self.palette_matrix = palette_matrix
         return conversion
 
     def convert_image(self, palette, show = True, save = False):
@@ -135,12 +175,14 @@ class Flag:
             self.flatten_image()
         if not hasattr(self, 'palette_matrix'):
             self.palette_conversion()
-        conversion = self.palette_matrix[palette]
+        conversion = self.conversion_matrix[palette]
         img = self.flat_image.copy()
         pixels = img.load()
         for x in range(img.size[0]):
             for y in range(img.size[1]):
                 pixels[x, y] = conversion[pixels[x, y]]
+        self.final_image = {}
+        self.final_image[palette] = img
         if show:
             img.show()
         if save:
@@ -148,27 +190,7 @@ class Flag:
             img.save(filepath, format = 'png')
         return img
 
-    def final_images(self, show = False, save = False):
-        self.converted_images = {}
-        for palette in palettes.keys():
-            self.converted_images[palette] = convert_image()
-            
 
-
-
-
-
-    def show_palette(self, palette):
-        if not hasattr(self, 'palette_matrix'):
-            self.derive_palettes()
-        if palette != 'base':
-            for color in self.palette_matrix[palette]:
-                _rgb = color
-                _hex = '#' + rgb_to_hex(color)
-                _name = palettes[palette]['hex_to_name'][_hex]
-                print(_rgb, _hex, _name)
-
-                # img.putpixel((x, y), self.xkcd_convert[color])
 
 
 if __name__ == '__main__':

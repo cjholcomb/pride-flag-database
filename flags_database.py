@@ -163,6 +163,7 @@ def similarity(color1, color2):
     except:
         computed = 0
     return computed
+
 class Flag:
     '''
     stores all relevant info for a given flag
@@ -214,7 +215,6 @@ class Flag:
         #         for y in range(paletted.size[1]):
         #             pixels[x, y] = conversion[pixels[x, y]]
         # else:
-
         colors_rgb = list()
         for i in range(0, self.num_colors):
             colors_rgb.append(color_counts[i][1])
