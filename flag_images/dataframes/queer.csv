@@ -1,0 +1,9 @@
+,flag,NAME,HEX,Red,Green,Blue,Cyan,Magenta,Yellow,Black,Preview,Marker,Swatch
+0,queer,black,#000000,0,0,0,0%,0%,0%,100%,,,
+1,queer,white,#ffffff,255,255,255,0.0%,0.0%,0.0%,0.0%,,,
+2,queer,sunflower,#ffc512,255,197,18,0.0%,22.75%,92.94%,0.0%,,,
+3,queer,coral pink,#ff6163,255,97,99,0.0%,61.96%,61.18%,0.0%,,,
+4,queer,azure,#069af3,6,154,243,97.53%,36.63%,0.0%,4.71%,,,
+5,queer,yellowish green,#b0dd16,176,221,22,20.36%,0.0%,90.05%,13.33%,,,
+6,queer,powder pink,#ffb2d0,255,178,208,0.0%,30.2%,18.43%,0.0%,,,
+7,queer,lightblue,#add8e6,173,216,230,24.78%,6.09%,0.0%,9.8%,,,

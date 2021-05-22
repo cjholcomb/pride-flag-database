@@ -1,0 +1,5 @@
+,flag,NAME,HEX,Red,Green,Blue,Cyan,Magenta,Yellow,Black,Preview,Marker,Swatch
+0,polyamory,black,#000000,0,0,0,0%,0%,0%,100%,,,
+1,polyamory,blue,#0000ff,0,0,255,100.0%,100.0%,0.0%,0.0%,,,
+2,polyamory,red,#ff0000,255,0,0,0.0%,100.0%,100.0%,0.0%,,,
+3,polyamory,fire engine red,#fe0002,254,0,2,0.0%,100.0%,99.21%,0.39%,,,

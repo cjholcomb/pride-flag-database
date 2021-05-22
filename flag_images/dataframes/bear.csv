@@ -1,0 +1,8 @@
+,flag,NAME,HEX,Red,Green,Blue,Cyan,Magenta,Yellow,Black,Preview,Marker,Swatch
+0,bear,black,#000000,0,0,0,0%,0%,0%,100%,,,
+1,bear,white,#ffffff,255,255,255,0.0%,0.0%,0.0%,0.0%,,,
+2,bear,medium brown,#7f5112,127,81,18,0.0%,36.22%,85.83%,50.2%,,,
+3,bear,brown,#653700,101,55,0,0.0%,45.54%,100.0%,60.39%,,,
+4,bear,sand yellow,#fce166,252,225,102,0.0%,10.71%,59.52%,1.18%,,,
+5,bear,moccasin,#ffe4b5,255,228,181,0.0%,10.59%,29.02%,0.0%,,,
+6,bear,browny orange,#ca6b02,202,107,2,0.0%,47.03%,99.01%,20.78%,,,

@@ -1,0 +1,4 @@
+,flag,NAME,HEX,Red,Green,Blue,Cyan,Magenta,Yellow,Black,Preview,Marker,Swatch
+0,neutrois,white,#ffffff,255,255,255,0.0%,0.0%,0.0%,0.0%,,,
+1,neutrois,black,#000000,0,0,0,0%,0%,0%,100%,,,
+2,neutrois,tab:green,#2ca02c,44,160,44,72.5%,0.0%,72.5%,37.25%,,,

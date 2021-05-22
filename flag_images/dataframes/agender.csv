@@ -1,0 +1,5 @@
+,flag,NAME,HEX,Red,Green,Blue,Cyan,Magenta,Yellow,Black,Preview,Marker,Swatch
+0,agender,black,#000000,0,0,0,0%,0%,0%,100%,,,
+1,agender,white,#ffffff,255,255,255,0.0%,0.0%,0.0%,0.0%,,,
+2,agender,silver,#c0c0c0,192,192,192,0.0%,0.0%,0.0%,24.71%,,,
+3,agender,pistachio,#c0fa8b,192,250,139,23.2%,0.0%,44.4%,1.96%,,,
