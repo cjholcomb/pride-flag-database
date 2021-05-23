@@ -1,3 +1,4 @@
+from numpy.lib.financial import _ipmt_dispatcher
 from flags_database import convert_all
 from PIL import Image, ImageDraw
 # from PIL import ImageFilter
@@ -9,11 +10,12 @@ import webcolors
 # import re
 # import os
 import pandas as pd
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 # import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 # from operator import itemgetter
 from math import sqrt
+import operator
 
 basic_colors = {'hotpink': (255, 105, 180),  'xkcd:red': (229, 0, 0),  'darkorange': (255, 140, 0),  'xkcd:dandelion': (254, 223, 8),  'xkcd:emerald green': (2, 143, 30),  
     'xkcd:turquoise blue': (6, 177, 196),  'xkcd:electric blue': (6, 82, 255),  'xkcd:indigo': (56, 2, 130),  'purple': (128, 0, 128),  
@@ -21,7 +23,9 @@ basic_colors = {'hotpink': (255, 105, 180),  'xkcd:red': (229, 0, 0),  'darkoran
     'xkcd:brown': (101, 55, 0),  'xkcd:rust brown': (139, 49, 3),  'xkcd:browny orange': (202, 107, 2),  'burlywood': (222, 184, 135),  'moccasin': (255, 228, 181),
     'xkcd:sand yellow': (252, 225, 102)}
 
-basic_flags ={'Qpoc',  'ally',  'basic',  'bear',  'original-pride',  'pride-poc-inclusive',  'progress',  'transgender',  'twospirit'}
+basic_flags = {'Qpoc',  'ally',  'basic',  'bear',  'original-pride',  'pride-poc-inclusive',  'progress',  'transgender',  'twospirit'}
+
+height_lookup = {0:300, 1:300, 2:300, 3:300, 4:300, 5:300, 6:300, 7:301, 8:304, 9:306}
 
 def value_sort(dct):
     return {k: v for k, v in sorted(dct.items(), key=lambda item: item[1], reverse=True)}
@@ -97,20 +101,65 @@ def rgb_to_cmyk(color):
     _k = str(round(k*100, 2)) + "%"
     
     return _c, _m, _y, _k
+
+def color_data(stats):
+    matrix = {}
+    for rgb in stats.keys():
+        matrix[rgb] = {}
+        matrix[rgb]['hex'] = webcolors.rgb_to_hex(rgb)
+        matrix[rgb]['volume'] = stats[rgb]['volume']
+        x_max = max(stats[rgb]['x_pos'])
+        y_max = max(stats[rgb]['y_pos'])
+        x_min = min(stats[rgb]['x_pos'])
+        y_min = min(stats[rgb]['y_pos'])
+        x_range = x_max - x_min
+        y_range = y_max - y_min
+        matrix[rgb]['max_x'] = x_max
+        matrix[rgb]['min_x'] = x_min
+        matrix[rgb]['max_y'] = y_max
+        matrix[rgb]['min_y'] = y_min
+        matrix[rgb]['range_x'] = x_range
+        matrix[rgb]['range_y'] = y_range
+    return matrix
+
 class Flag:
     '''
     stores all relevant info for a given flag
     '''
 
-    def __init__(self, name, folder = 'flag_images'):
+    def __init__(self, name, folder = 'flag_images', image_multiplier = 2):
         self.name = name
         self.num_colors = flag_data.loc[self.name]['Colors']
+        self.num_stripes = flag_data.loc[self.name]['Stripes']
+        self.num_chevrons = flag_data.loc[self.name]['Chevrons']
+        self.num_symbols = flag_data.loc[self.name]['Symbols']
+        self.irregular = flag_data.loc[self.name]['Irregular']
         self.description = flag_data.loc[self.name]['Description']
         self.folder = folder
         self.filepath = folder + '/' + name + '.jpg'
         self.raw_image = Image.open(self.filepath)
         self.raw_image = self.raw_image.convert(mode ='RGB')
+        self.define_type()
+        if image_multiplier > 0:
+            self.multiplier = image_multiplier
+        else:
+            self.multiplier = 1
 
+    def define_type(self):
+        if self.irregular:
+            self.type = 'irregular'
+        elif self.num_chevrons:
+            self.type = 'chevron'
+        elif self.num_colors == self.num_stripes:
+            self.type = 'simple'
+        elif self.num_stripes == (self.num_colors* 2) - 1:
+            self.type = 'mirrored'
+        elif self.num_symbols:
+            self.type = 'symbol'
+        else:
+            self.type = 'undefined'
+
+    
     def define_palette(self):
         img = self.raw_image
         width, height = img.size
@@ -128,6 +177,7 @@ class Flag:
         base_colors = []
         final_colors = []
         i = 0
+
         while len(base_colors) < self.num_colors:
             converted = closest_color(sorted_colors[i], palette_choices)
             if converted not in final_colors:
@@ -147,13 +197,29 @@ class Flag:
         conversion = {}
         for color in self.raw_palette:
             if color not in conversion.keys():
-                conversion[color] = closest_color(color, self.base_palette)
+                base_color = closest_color(color, self.base_palette)
+                conversion[color] = base_color
         raw_image = self.raw_image
         flat_image = raw_image.copy()
+        color_stats = {}
         pixels = flat_image.load()
         for x in range(flat_image.size[0]):
             for y in range(flat_image.size[1]):
                 pixels[x, y] = conversion[pixels[x, y]]
+                color_new = conversion[pixels[x, y]]
+                if color_new not in color_stats.keys():
+                    color_stats[color_new] = {}
+                    color_stats[color_new]['volume'] = 0
+                    color_stats[color_new]['x_pos'] = {x}
+                    color_stats[color_new]['y_pos'] = {y}
+                color_stats[color_new]['volume'] += 1
+                color_stats[color_new]['x_pos'].add(x)
+                color_stats[color_new]['y_pos'].add(y)
+        color_stats = (color_data(color_stats))
+        self.base_stats = color_stats
+        color_heights = [color_stats[x]['max_y'] for x in self.base_palette]
+        color_order = self.order_colors(dict(zip(self.base_palette, color_heights)))
+        self.ordered_palette = [self.palette_matrix[x] for x in color_order]
         self.flat_image = flat_image
         if show:
             flat_image.show()
@@ -161,16 +227,41 @@ class Flag:
             filepath = 'flag_images/flat/' + self.name + '_flat.png'
             flat_image.save(filepath, format='png')
 
+    def order_colors(self, stats):
+        sorted_tuples = sorted(stats.items(), key=operator.itemgetter(1))
+        sorted_dict = OrderedDict()
+        for k, v in sorted_tuples:
+            sorted_dict[k] = v
+        ymax_sort = list(sorted_dict.keys())
+        if self.type == 'simple':
+            return ymax_sort
+        elif self.type == 'mirrored':
+            mirror_add = int(self.num_stripes - self.num_colors)
+            # print(mirror_add)
+            mirror_back = ymax_sort[-mirror_add:]
+            mirror_back.reverse()
+            # print(mirror_back)
+            mirrored_palette = mirror_back + ymax_sort
+            # ymax_sort.extend(mirror_back)
+            return mirrored_palette
+
+
     def final_image(self, show = True, save = False):
-        if not hasattr(self, 'flat_image'):
-            self.flatten_image()
-        conversion = self.palette_matrix
-        img = self.flat_image.copy()
-        pixels = img.load()
-        for x in range(img.size[0]):
-            for y in range(img.size[1]):
-                pixels[x, y] = conversion[pixels[x, y]]
-        self.final_image = img
+        if self.type in ('simple', 'mirrored'):
+            img = self.reconstruct()
+        else:
+            if not hasattr(self, 'flat_image'):
+                self.flatten_image()
+            conversion = self.palette_matrix
+            img = self.flat_image.copy()
+            pixels = img.load()
+            color_stats = {}
+            for x in range(img.size[0]):
+                for y in range(img.size[1]):
+                    color_old = pixels[x, y]
+                    color_new = conversion[pixels[x, y]]
+                    pixels[x, y] = conversion[pixels[x, y]]
+            self.final_image = img
         if show:
             img.show()
         if save:
@@ -179,11 +270,11 @@ class Flag:
         return img
 
     def palette_detail(self, medium = 'Marker', export = False):
-        if not hasattr(self, 'palette_matrix'):
-            self.define_palette()
+        if not hasattr(self, 'ordered_palette'):
+            self.flatten_image()
         columns = ['flag', 'NAME', 'HEX', 'Red', 'Green', 'Blue', 'Cyan', 'Magenta', 'Yellow', 'Black', 'Preview', medium, 'Swatch']
         df = pd.DataFrame(columns = columns)
-        colors = list(self.palette_matrix.values())
+        colors = self.ordered_palette
         for color in colors:
             color_tuple = tuple(color)
             color_hex = webcolors.rgb_to_hex(color_tuple)
@@ -202,6 +293,25 @@ class Flag:
             filepath = 'flag_images/dataframes/' + self.name + '.csv'
             (df.to_csv(filepath))
         return df
+
+    def reconstruct(self):
+        if not hasattr(self, 'flat_image'):
+            self.flatten_image()
+        height = height_lookup[self.num_stripes]
+        height = height * self.multiplier
+        width = 500 * self.multiplier
+        img = Image.new('RGB', size = (width, height))
+        draw = ImageDraw.Draw(img)
+        y = 0
+        stripe_height = height/self.num_stripes
+        for color in self.ordered_palette:
+            draw.rectangle([0, y, width, y + stripe_height], fill = color)
+            if y == 0:
+                y = 1
+            y += stripe_height
+        del draw
+        return img
+
 
 if __name__ == '__main__':
     flag_data = pd.read_csv('flag_data.csv', sep = '|')
