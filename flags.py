@@ -56,12 +56,20 @@ def color_swatch(colors, vertical = False, swatchsize=100, show = True, save=Fal
             Image object
     '''    
     num_colors = len(colors)
-    palette = Image.new('RGB', (swatchsize*num_colors, swatchsize))
+    if vertical:
+        height = swatchsize * num_colors
+        width = swatchsize
+    else:
+        height = swatchsize
+        width = swatchsize * num_colors
+    palette = Image.new('RGB', (width, height))
     draw = ImageDraw.Draw(palette)
     posx = 0
+    posy = 0
     for color in colors:
-        draw.rectangle([posx, 0, posx+swatchsize, swatchsize], fill=color) 
-        posx = posx + swatchsize
+        draw.rectangle([posx, posy, posx+swatchsize, posy + swatchsize], fill=color) 
+        posx = posx + (swatchsize * (not vertical))
+        posy = posy + (swatchsize * (vertical))
     del draw
     palette.show()
     if save:
