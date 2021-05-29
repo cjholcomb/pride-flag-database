@@ -1,7 +1,10 @@
+from numpy.core.fromnumeric import _searchsorted_dispatcher
 from numpy.lib.financial import _ipmt_dispatcher
 from numpy.lib.function_base import average
 from flags_database import convert_all
 from PIL import Image, ImageDraw
+import numpy as np
+import math
 # from PIL import ImageFilter
 # import argparse
 # import sys
@@ -25,6 +28,10 @@ basic_colors = {'hotpink': (255, 105, 180),  'xkcd:red': (229, 0, 0),  'darkoran
     'xkcd:brown': (101, 55, 0),  'xkcd:rust brown': (139, 49, 3),  'xkcd:browny orange': (202, 107, 2),  'burlywood': (222, 184, 135),  'moccasin': (255, 228, 181),
     'xkcd:sand yellow': (252, 225, 102)}
 
+chevron_params = {'progress': {'angle': 90, 'start_point': 0.42}, 'demisexual': {'angle': 77, 'start_point': 0.38}}
+
+stripes_widths= {'bisexual': [0, 0.4, 0.6], 'demisexual': [0, .45, .55]}
+
 #flags to use basic palette
 basic_flags = {'Qpoc',  'ally',  'basic',  'bear',  'original-pride',  'pride-poc-inclusive',  'progress',  'transgender',  'twospirit'}
 
@@ -32,7 +39,7 @@ basic_flags = {'Qpoc',  'ally',  'basic',  'bear',  'original-pride',  'pride-po
 height_lookup = {0:300, 1:300, 2:300, 3:300, 4:300, 5:300, 6:300, 7:301, 8:304, 9:306}
 
 #key statistics to define how colors are ordered
-ordering_stat = {'simple':'mean_y', 'mirrored':'max_y'}
+ordering_stat = {'simple':'mean_y', 'mirrored':'max_y', 'chevron': 'range_y'}
 
 def value_sort(dct):
     '''
@@ -173,17 +180,36 @@ def rgb_to_cmyk(color):
     
     return _c, _m, _y, _k
 
-def color_data(stats):
+def sortby_value(dct):
+    '''
+    Sorts a single dictionary by valuues, ascending.
+
+    Parameters:
+        dct (dict):Single-layer dictionary
+
+    Returns:
+        Sorted dictionary
+    '''
+    sorted_tuples = sorted(dct.items(), key=operator.itemgetter(1))
+    sorted_dict = OrderedDict()
+    for k, v in sorted_tuples:
+        sorted_dict[k] = v
+    return sorted_dict
+
+def color_data(stats, img):
     '''
     Documents import statistics on piels within an image, by color
 
         Parameters:
             stats (dict): Nested (two-layer) dictionary of raw counts and posistions of colors
+            img (Pillow Image): Image being analyzed
 
         Returns:
             Two-layer nested dictionary of color stats
     '''
     matrix = {}
+    matrix['full_height'] =  img.size[1]
+    matrix['full_width'] = img.size[0]
     for rgb in stats.keys():
         matrix[rgb] = {}
         matrix[rgb]['hex'] = webcolors.rgb_to_hex(rgb)
@@ -194,8 +220,8 @@ def color_data(stats):
         y_min = min(stats[rgb]['y_pos'])
         x_mean = sum(stats[rgb]['x_pos']) / len(stats[rgb]['x_pos'])
         y_mean = sum(stats[rgb]['y_pos']) / len(stats[rgb]['y_pos'])
-        x_range = x_max - x_min
-        y_range = y_max - y_min
+        x_range = x_max - x_min + 1
+        y_range = y_max - y_min + 1
         matrix[rgb]['max_x'] = x_max
         matrix[rgb]['min_x'] = x_min
         matrix[rgb]['max_y'] = y_max
@@ -205,6 +231,47 @@ def color_data(stats):
         matrix[rgb]['range_x'] = x_range
         matrix[rgb]['range_y'] = y_range
     return matrix
+
+def pixel_replace(img, conversion, stats = False):
+    pixels = pixels = img.load()
+    width, height = (img.size[0], img.size[1])
+    if stats:
+        color_stats = {}
+        # color_stats[width] = width
+        # color_stats[height] = height
+    for x in range(width):
+        for y in range(height):
+            pixels[x, y] = conversion[pixels[x, y]]
+            if stats:
+                color_new = conversion[pixels[x, y]]
+                if color_new not in color_stats.keys():
+                    color_stats[color_new] = {}
+                    color_stats[color_new]['volume'] = 0
+                    color_stats[color_new]['x_pos'] = {x}
+                    color_stats[color_new]['y_pos'] = {y}
+                color_stats[color_new]['volume'] += 1
+                color_stats[color_new]['x_pos'].add(x)
+                color_stats[color_new]['y_pos'].add(y)
+    if stats:
+        return img, color_stats
+    else:
+        return img
+
+def compute_chevron(angle =  90, apex = None, invert = False):
+    angle_sm = (180 - angle) /2
+    angle = math.radians(angle)
+    angle_sm = math.radians(angle_sm)
+    side = (math.sin(angle_sm))/ (math.sin(angle)) 
+    width = (side**2) /2
+    if not apex:
+        apex = width
+    point_cen = (apex, 0.5)
+    point_top = ((apex - width), 0)
+    point_bot = ((apex - width), 1)
+    
+    return [point_cen, point_bot, (0, 1), (0, 0), point_top ]
+
+    
 
 class Flag:
     """
@@ -286,20 +353,29 @@ class Flag:
         '''
             
         self.name = name
-        self.num_colors = flag_data.loc[self.name]['Colors']
-        self.num_stripes = flag_data.loc[self.name]['Stripes']
-        self.num_chevrons = flag_data.loc[self.name]['Chevrons']
-        self.num_symbols = flag_data.loc[self.name]['Symbols']
+        self.num_colors = int(flag_data.loc[self.name]['Colors'])
+        self.num_stripes = int(flag_data.loc[self.name]['Stripes'])
+        self.num_chevrons = int(flag_data.loc[self.name]['Chevrons'])
+        self.num_symbols = int(flag_data.loc[self.name]['Symbols'])
         self.description = flag_data.loc[self.name]['Description']
         self.folder = folder
         self.filepath = folder + '/' + name + '.jpg'
         self.raw_image = Image.open(self.filepath)
         self.raw_image = self.raw_image.convert(mode ='RGB')
+        self.chevron_params = {}
         self.define_type()
         if image_multiplier > 0:
             self.multiplier = image_multiplier
         else:
             self.multiplier = 1
+        self.stripe_colors = []
+        self.chevron_colors = []
+        self.symbol_colors =[]
+        if name in stripes_widths.keys():
+            self.stripes_dist = stripes_widths[name]
+        else:
+            self.stripes_dist = None
+        
 
     def define_type(self):
         '''
@@ -317,12 +393,11 @@ class Flag:
             self.type = 'irregular'
         elif self.num_chevrons:
             self.type = 'chevron'
+            self.chevron_params = chevron_params[self.name]
         elif self.num_colors == self.num_stripes:
             self.type = 'simple'
-        elif self.name in {'bigender'}:
+        elif self.name in {'bigender', 'queer'}:
             self.type = 'simple'
-        elif self.name in {'queer'}:
-            self.type = 'mirrored'
         elif self.num_stripes == (self.num_colors* 2) - 1:
             self.type = 'mirrored'
         elif self.num_symbols:
@@ -346,8 +421,8 @@ class Flag:
         width, height = img.size
         
         #reduces large images to improve performance
-        if height > 500:
-            img.thumbnail((500,500))
+        # if height > 500:
+        #     img.thumbnail((500,500))
         by_color = defaultdict(int)
         
         #collects all distinct colors in the image
@@ -376,6 +451,10 @@ class Flag:
         #handle exceptions
         if self.name == 'pride-poc-inclusive':
             final_colors = [(128, 0, 128) if x == (255, 105, 180) else x for x in final_colors]
+        if self.name == 'progress':
+            final_colors = [(6, 82, 255) if x == (128, 0, 128) else x for x in final_colors]
+            final_colors = [(128, 0, 128) if x == (56, 2, 130) else x for x in final_colors]
+            
 
         #stores palettes in attributes
         self.raw_palette = sorted_colors
@@ -418,35 +497,32 @@ class Flag:
         #creates an image copy to change
         raw_image = self.raw_image
         flat_image = raw_image.copy()
-        color_stats = {}
-        pixels = flat_image.load()
+        flat_image, color_stats = pixel_replace(flat_image, conversion = conversion, stats = True)
+        # color_stats = {}
+        # pixels = flat_image.load()
         
-        #iterates through pixels, converting and documenting stats
-        for x in range(flat_image.size[0]):
-            for y in range(flat_image.size[1]):
-                pixels[x, y] = conversion[pixels[x, y]]
-                color_new = conversion[pixels[x, y]]
-                if color_new not in color_stats.keys():
-                    color_stats[color_new] = {}
-                    color_stats[color_new]['volume'] = 0
-                    color_stats[color_new]['x_pos'] = {x}
-                    color_stats[color_new]['y_pos'] = {y}
-                color_stats[color_new]['volume'] += 1
-                color_stats[color_new]['x_pos'].add(x)
-                color_stats[color_new]['y_pos'].add(y)
+        # #iterates through pixels, converting and documenting stats
+        # for x in range(flat_image.size[0]):
+        #     for y in range(flat_image.size[1]):
+        #         pixels[x, y] = conversion[pixels[x, y]]
+        #         color_new = conversion[pixels[x, y]]
+        #         if color_new not in color_stats.keys():
+        #             color_stats[color_new] = {}
+        #             color_stats[color_new]['volume'] = 0
+        #             color_stats[color_new]['x_pos'] = {x}
+        #             color_stats[color_new]['y_pos'] = {y}
+        #         color_stats[color_new]['volume'] += 1
+        #         color_stats[color_new]['x_pos'].add(x)
+        #         color_stats[color_new]['y_pos'].add(y)
         
         #converts gathered color data to necessary format
-        color_stats = (color_data(color_stats))
+        self.raw_stats = color_stats
+        color_stats = (color_data(color_stats, flat_image))
         self.base_stats = color_stats
         
         #establishes proper final palette order. Passes appropriate stat from order_stat by type
-        color_index = [color_stats[x][ordering_stat[self.type]] for x in self.base_palette]
-        color_order = self.order_colors(dict(zip(self.base_palette, color_index)))
-        self.ordered_palette = [self.palette_matrix[x] for x in color_order]
+        # self.order_colors()
         
-        #handle exceptions
-        if self.name == 'bigender':
-            self.ordered_palette.insert(4, (216, 191, 216))
         
         #saves image as attribute
         self.flat_image = flat_image
@@ -458,39 +534,224 @@ class Flag:
             filepath = 'flag_images/flat/' + self.name + '_flat.png'
             flat_image.save(filepath, format='png')
 
-    def order_colors(self, stats):
+    def map_colors(self):
+        if not hasattr(self, 'base_palette'):
+            self.flatten_image()
+        columns = ['position', 'type', 'base_rgb', 'final_rgb', 'final_hex', 'final_name', 'volume', 'min_x', 'max_x', 'range_x', 'center_x', 'min_y',  'max_y', 'range_y', 'center_y']
+        width = self.base_stats['full_width']
+        height = self.base_stats['full_height']
+        num_pixels = height * width
+        df = pd.DataFrame(columns= columns)
+        for color in self.base_palette:
+            dct = {}
+            final_color = self.palette_matrix[color]
+            dct['base_rgb'] = color
+            dct['final_rgb'] = final_color
+            dct['final_hex'] = webcolors.rgb_to_hex(final_color)
+            dct['final_name'] = palette_lookup[final_color]
+            dct['volume'] = self.base_stats[color]['volume'] / num_pixels
+            dct['min_x'] = self.base_stats[color]['min_x'] / width
+            dct['max_x'] = self.base_stats[color]['max_x'] / width
+            dct['range_x'] = self.base_stats[color]['range_x'] / width
+            dct['center_x'] = (dct['range_x'] / 2) + dct['min_x']
+            dct['min_y'] = self.base_stats[color]['min_y'] / height
+            dct['max_y'] = self.base_stats[color]['max_y'] / height
+            dct['range_y'] = self.base_stats[color]['range_y'] / height
+            dct['center_y'] = (dct['range_y'] / 2) + dct['min_y']
+            df = df.append(dct, ignore_index= True)
+
+        #handle exceptions
+        if self.name == 'bigender':
+            repeat = list(df.iloc[0])
+            repeat[-1] = 0.6
+            addition = dict(zip(columns, repeat))
+            df = df.append(addition, ignore_index= True)
+
+        if self.name == 'queer':
+            df.iloc[0,-1]
+            repeat = list(df.iloc[0])
+            repeat[-1] = 1.1
+            addition = dict(zip(columns, repeat))
+            df = df.append(addition, ignore_index= True)
+
+        if self.name == 'demisexual':
+            df['range_y'] = [0.45, 0.45, 1, .1]
+            df['min_y'] = [0, 0.55, 0, 0.45]
+            # return df
+
+
+        if self.type == 'chevron':
+            chevron_df = df.sort_values(by = 'range_y', ascending = False).head(self.num_chevrons)
+            chevron_df['type'] = 'chevron'
+            chevron_df['position'] = list(range(self.num_stripes + 1, self.num_stripes + self.num_chevrons +1))
+            chevron_df.set_index('position', inplace= True)
+            # return chevron_df
+
+        
+        df = df.sort_values(by = 'range_y').head(self.num_stripes)
+        # return df
+        df = df.sort_values(by = 'min_y')
+        # return df
+        if self.type == 'mirrored':
+            mirrored_df = df.tail(self.num_colors-1)
+            df = df.sort_values(by = 'max_y', ascending= False).append(mirrored_df)
+        df['position'] = list(range(1, self.num_stripes+1))
+        df['type'] = 'stripe'
+        df.set_index('position', inplace = True)
+        
+        if self.type == 'chevron':
+            df = df.append(chevron_df)
+        df= self.recalibrate_map(df, stripe_dist = self.stripes_dist)
+        
+        self.color_map = df
+        return df
+
+        # if self.type == 'simple':
+            
+        #     stripes_positions = dict(zip(stripes_df['final_name'], range(1, self.num_stripes + 1)))
+        #     stripes_df['position'] = stripes_df['final_name'].map(stripes_positions)
+        #     stripes_df['type'] = 'stripe'
+        #     df = stripes_df
+        #     df = self.recalibrate_map(df)
+        # if self.type == 'mirrored':
+        #     stripes_df = df.sort_values(by = 'range_y').head(self.num_stripes).sort_values(by = 'max_y')
+        #     mirrored_df = stripes_df.tail(self.num_colors-1)
+        #     stripes_df = stripes_df.sort_values(by = 'max_y', ascending= False).append(mirrored_df)
+        #     stripes_df['position'] = list(range(1, self.num_stripes+1))
+        #     stripes_df['type'] = 'stripe'
+        #     df = stripes_df
+        #     df= self.recalibrate_map(df)
+
+        #     # mirrored_df = stripes_df.sort_values(by = 'position', ascending= False).t(self.num_colors - 1)
+        #     # return mirrored_df
+        # # if self.type == 'mirrored':
+        #     # stripes_df['position'] = stripes_positions[df['final_name']]
+        
+        # self.color_map = df
+        # return df
+
+    def recalibrate_map(self, df, stripe_dist , chevron_dist = None):
+        if not stripe_dist:
+            ratio = 1 /self.num_stripes
+            stripe_dist = np.linspace(0, 1 - ratio, self.num_stripes)
+            # print(df)
+        if not chevron_dist:
+            if self.num_chevrons > 0:
+                start_point =  self.chevron_params['start_point']
+                angle = self.chevron_params['angle']
+                chevron_width = start_point / self.num_chevrons
+                chevron_dist = np.linspace(start_point, chevron_width * 1.5, self.num_chevrons)
+            # print(chevron_dist)
+        points = {}
+        for index, row in df.iterrows():
+            # pos = row['position']
+            pos = index
+            # print(pos, row['final_name'])
+            if row['type'] == 'stripe':
+                min_x = 0
+                max_x = 1
+                range_x = 1
+                center_x = 0.5
+                min_y = stripe_dist[index - 1]
+                if pos == len(stripe_dist):
+                    max_y = 1
+                else:
+                    max_y = stripe_dist[pos]
+                range_y = max_x - max_y
+                center_y = (range_y /2) + min_y
+                point_rb = (max_x, max_y)
+                point_lb = (min_x, max_y)
+                point_lt = (min_x, min_y)
+                point_rt = (max_x, min_y)
+
+                # df.at[index, 'min_x'] = max_x
+                # df.at[index, 'max_x'] = max_y
+                # df.at[index, 'range_x'] = range_x
+                # df.at[index, 'center_x'] = center_x
+                # df.at[index, 'min_y'] = min_y
+                # df.at[index, 'max_y'] = max_y
+                # df.at[index, 'range_y'] = row['max_y'] - row['min_y']
+                # df.at[index, 'center_y'] = (row['range_y'] / 2) + row['min_y']
+
+                points[row['final_rgb']] = [point_rb, point_lb, point_lt, point_rt]
+        
+            elif row['type'] == 'chevron':
+                
+                chevron_num = pos - self.num_stripes
+                start_point = 0.45
+
+                if self.num_chevrons == 1:
+                    points[row['final_rgb']] = [(chevron_dist[0], 0.5), (0, 1), (0, 0)]
+                else:
+                    points[row['final_rgb']] = compute_chevron(angle =  angle, apex = chevron_dist[chevron_num - 1])
+        
+        self.points = points
+        return df
+
+    
+    def order_colors(self):
         '''
-        Creates image with all colors changed to base palette
+        Produces list of colors in correct order for palette
 
         Parameters
         ----------
-            stats : dict
-                Dictionary of colors (keys) to appropriate stat (values)
+            List of rgb colors ordered properly (stripes top-to-bottom, chevrons inside to outside, symbols)
 
         Returns
         -------
         Pillow Image
         '''
         
-        sorted_tuples = sorted(stats.items(), key=operator.itemgetter(1))
-        sorted_dict = OrderedDict()
-        for k, v in sorted_tuples:
-            sorted_dict[k] = v
+        if not hasattr(self, 'base_stats'):
+            self.flatten_image()
+        
+        
         
         #orders appropriate stats (defined by type)
-        stat_sort = list(sorted_dict.keys())
+        # stat_sort = list(sorted_dict.keys())
         
         #simple flag only needs a direct list
         if self.type == 'simple':
-            return stat_sort
+            stats_dict = dict(zip(self.base_palette, [self.base_stats[x]['mean_y'] for x in self.base_palette]))
+            stats_dict = sortby_value(stats_dict)
+            ordered_palette = dict(zip(stats_dict.keys(), [self.palette_matrix[x] for x in stats_dict.keys()]))
+            self.palette_matrix = ordered_palette
+            self.ordered_palette = list(ordered_palette.values())
+            return ordered_palette
        
-       #mirroed flag duplicates the tail
+       #mirrored flag duplicates the tail
         elif self.type == 'mirrored':
+            stats_dict = dict(zip(self.base_palette, [self.base_stats[x]['max_y'] for x in self.base_palette]))
+            stats_dict = sortby_value(stats_dict)            
+            ordered_palette = dict(zip(stats_dict.keys(), [self.palette_matrix[x] for x in stats_dict.keys()]))
+            self.palette_matrix = ordered_palette
+            
             mirror_add = int(self.num_stripes - self.num_colors)
-            mirror_back = stat_sort[-mirror_add:]
+            mirror_back = (list(ordered_palette.keys()))[-mirror_add:]
             mirror_back.reverse()
-            mirrored_palette = mirror_back + stat_sort
+            mirrored_palette = mirror_back + list(stats_dict.keys())
+            self.ordered_palette = mirrored_palette
             return mirrored_palette
+
+        #chevron flags ???
+        elif self.type == 'chevron':
+            rangey_dict = dict(zip(self.base_palette, [self.base_stats[x]['range_y'] for x in self.base_palette]))
+            rangey_dict = sortby_value(rangey_dict)
+            meanx_dict = dict(zip(self.base_palette, [self.base_stats[x]['mean_x'] for x in self.base_palette]))
+            meanx_dict = sortby_value(meanx_dict)
+            meany_dict = dict(zip(self.base_palette, [self.base_stats[x]['mean_y'] for x in self.base_palette]))
+            meany_dict = sortby_value(meany_dict)
+            maxx_dict = dict(zip(self.base_palette, [self.base_stats[x]['max_x'] for x in self.base_palette]))
+            maxx_dict = sortby_value(maxx_dict)
+
+            stripes = list(rangey_dict.keys())[:self.num_stripes]
+            stripes_list = [x for x in meany_dict.keys() if x in stripes]
+            chevrons = list(meanx_dict.keys())[:self.num_chevrons]
+            self.chevron_colors = chevrons
+            ordered_palette = stripes_list
+            ordered_palette.extend(chevrons)
+            self.ordered_palette = ordered_palette
+            return ordered_palette
 
     def final_image(self, show = True, save = False):
         '''
@@ -604,26 +865,76 @@ class Flag:
         '''
         
         #runs methods to create needed attributes
-        if not hasattr(self, 'flat_image'):
-            self.flatten_image()
+        if not hasattr(self, 'color_map'):
+            self.map_colors()
         
         #derives size of output image
         height = height_lookup[self.num_stripes]
         height = height * self.multiplier
         width = 500 * self.multiplier
-        
+        num_pixels = height * width
+
+        conversion = {'volume':num_pixels, 'min_x':width, 'max_x':width, 'range_x':width, 'center_x':width, 'min_y':height,  'max_y':height, 'range_y':height, 'center_y':height}
+
+        df = self.color_map
+        for stat, multiplier in conversion.items():
+            df[stat] = df[stat].apply(lambda x: int(x * multiplier))
+            df['min_y'] = df['min_y'].apply(lambda x: x + 1 if x > 1 else 0)
         #creates image object
         img = Image.new('RGB', size = (width, height))
         draw = ImageDraw.Draw(img)
-        y = 0
-        
-        #iterates through palette creating 
-        stripe_height = height/self.num_stripes
-        for color in self.ordered_palette:
-            draw.rectangle([0, y, width, y + stripe_height], fill = color)
-            if y == 0:
-                y = 1
-            y += stripe_height
+        for color, points in self.points.items():
+            new_points = []
+            for point in points:
+                new_points.append( (point[0] * width, point[1]* height))
+            # print(new_points, color)
+            draw.polygon(new_points, fill =  color)
+            # img.show()
+            # input('x')
+
+
+
+        # for index, row in df.iterrows():
+        #     points = []
+        #     for point in row['points']:
+        #         # print(point[0], point[1])
+        #         points.append(tuple((point[0] * width, point[1]* height)))
+        #     df.at[index, 'points'] = points
+        #     if row['type'] == 'stripe':
+        #         draw.rectangle([row['points']], fill = row['final_rgb'])
+            # if row['type'] == 'chevron':
+            #     if index == self.num_stripes + 1:
+            #         point1 = (row['max_x'], height / 2)
+            #         point2 = (df.loc[1]['min_x'], height)
+            #         point3 = (row['min_x'], height)
+            #         point4 = (row['min_x'], 0)
+            #         point5 = (df.loc[1]['min_x'], 0)
+            #         points = [point1, point2, point3, point4, point5]
+            #         draw.polygon(points, fill = row['final_rgb'])
+            #     elif row['min_x'] > 0:
+            #         point1 = (row['max_x'], height / 2)
+            #         point2 = (df.loc[index-1]['min_x'], height)
+            #         point3 = (row['min_x'], height)
+            #         point4 = (row['min_x'], 0)
+            #         point5 = (df.loc[index-1]['min_x'], 0)
+            #         points = [point1, point2, point3, point4, point5]
+            #         draw.polygon(points, fill = row['final_rgb'])
+            #     elif ((row['min_y'] == 0) & (row['min_x'] == 0)):
+            #         point1 = (row['max_x'], height / 2)
+            #         point2 = (df.loc[index-1]['min_x'], height)
+            #         point3 = (0, height)
+            #         point4 = (0, 0)
+            #         point5 = (df.loc[index-1]['min_x'], 0)
+            #         points = [point1, point2, point3, point4, point5]
+            #         draw.polygon(points, fill = row['final_rgb'])
+            #     else:
+            #         point1 = (row['max_x'], height / 2)
+            #         point2 = (0, row['max_y'])
+            #         point2 = (0, row['min_y'])
+            #         points = [point1, point2, point3]
+            #         draw.polygon(points, fill = row['final_rgb'])
+
+
         del draw
         return img
 
