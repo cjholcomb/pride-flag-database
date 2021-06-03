@@ -26,7 +26,7 @@ basic_colors = {'hotpink': (255, 105, 180),  'xkcd:red': (229, 0, 0),  'darkoran
     'xkcd:turquoise blue': (6, 177, 196),  'xkcd:electric blue': (6, 82, 255),  'xkcd:indigo': (56, 2, 130),  'purple': (128, 0, 128),  
     'black': (0, 0, 0),  'white': (255, 255, 255),  'xkcd:sky blue': (117, 187, 253),  'xkcd:soft pink': (253, 176, 192),  'xkcd:dark brown': (52, 28, 2),
     'xkcd:brown': (101, 55, 0),  'xkcd:rust brown': (139, 49, 3),  'xkcd:browny orange': (202, 107, 2),  'burlywood': (222, 184, 135),  'moccasin': (255, 228, 181),
-    'xkcd:sand yellow': (252, 225, 102)}
+    'xkcd:sand yellow': (252, 225, 102), 'xkcd:gunmetal':(83, 98, 103)}
 
 chevron_params = {'progress': {'angle': 90, 'start_point': 0.42}, 'demisexual': {'angle': 77, 'start_point': 0.38}}
 
@@ -233,7 +233,7 @@ def color_data(stats, img):
     return matrix
 
 def pixel_replace(img, conversion, stats = False):
-    pixels = pixels = img.load()
+    pixels = img.load()
     width, height = (img.size[0], img.size[1])
     if stats:
         color_stats = {}
@@ -376,7 +376,6 @@ class Flag:
         else:
             self.stripes_dist = None
         
-
     def define_type(self):
         '''
         Establishes type attribute
@@ -560,19 +559,32 @@ class Flag:
             dct['center_y'] = (dct['range_y'] / 2) + dct['min_y']
             df = df.append(dct, ignore_index= True)
 
+        if self.type == 'symbol':
+            df = df.sort_values(by = 'volume', ascending = False)
+            # return df
+            symbol_df = df.sort_values(by = 'volume', ascending = True).head(self.num_symbols)
+            # return symbol_df
+            df = df.drop(df.tail(1).index)
+            # return df
+            symbol_df['position'] = list(range(100, ((self.num_symbols+1) *100) , 100))
+            symbol_df['type'] = 'symbol'
+            # return symbol_df
+
         #handle exceptions
         if self.name == 'bigender':
             repeat = list(df.iloc[0])
             repeat[-1] = 0.6
             addition = dict(zip(columns, repeat))
             df = df.append(addition, ignore_index= True)
+            # return df
 
         if self.name == 'queer':
-            df.iloc[0,-1]
+            df.iloc[0,-1] = 0
             repeat = list(df.iloc[0])
             repeat[-1] = 1.1
             addition = dict(zip(columns, repeat))
             df = df.append(addition, ignore_index= True)
+            # return df
 
         if self.name == 'demisexual':
             df['range_y'] = [0.45, 0.45, 1, .1]
@@ -587,21 +599,33 @@ class Flag:
             chevron_df.set_index('position', inplace= True)
             # return chevron_df
 
+
+
         
         df = df.sort_values(by = 'range_y').head(self.num_stripes)
         # return df
         df = df.sort_values(by = 'min_y')
         # return df
         if self.type == 'mirrored':
-            mirrored_df = df.tail(self.num_colors-1)
+            # return df
+            mirrored_df = df.head(self.num_colors-1).sort_values(by = 'min_y', ascending= False)
+            # return mirrored_df
             df = df.sort_values(by = 'max_y', ascending= False).append(mirrored_df)
+            # return df
+        if self.name in {'bigender', 'queer'}:
+            df = df.sort_values(by = 'center_y')
         df['position'] = list(range(1, self.num_stripes+1))
         df['type'] = 'stripe'
+        if self.type == 'symbol':
+            df = df.append(symbol_df)
         df.set_index('position', inplace = True)
         
         if self.type == 'chevron':
             df = df.append(chevron_df)
+
         df= self.recalibrate_map(df, stripe_dist = self.stripes_dist)
+
+
         
         self.color_map = df
         return df
@@ -643,6 +667,10 @@ class Flag:
                 chevron_dist = np.linspace(start_point, chevron_width * 1.5, self.num_chevrons)
             # print(chevron_dist)
         points = {}
+        # end = self.num_stripes
+        if self.type == 'mirrored':
+            end = self.num_colors
+
         for index, row in df.iterrows():
             # pos = row['position']
             pos = index
@@ -673,7 +701,9 @@ class Flag:
                 # df.at[index, 'range_y'] = row['max_y'] - row['min_y']
                 # df.at[index, 'center_y'] = (row['range_y'] / 2) + row['min_y']
 
-                points[row['final_rgb']] = [point_rb, point_lb, point_lt, point_rt]
+                points[(row['final_rgb'], pos)] = [point_rb, point_lb, point_lt, point_rt]
+                # if index == end:
+                    # break
         
             elif row['type'] == 'chevron':
                 
@@ -681,14 +711,87 @@ class Flag:
                 start_point = 0.45
 
                 if self.num_chevrons == 1:
-                    points[row['final_rgb']] = [(chevron_dist[0], 0.5), (0, 1), (0, 0)]
+                    points[(row['final_rgb'], pos)] = [(chevron_dist[0], 0.5), (0, 1), (0, 0)]
                 else:
-                    points[row['final_rgb']] = compute_chevron(angle =  angle, apex = chevron_dist[chevron_num - 1])
+                    points[(row['final_rgb'], pos)] = compute_chevron(angle =  angle, apex = chevron_dist[chevron_num - 1])
         
         self.points = points
+        # print(len(points), points)
         return df
+ 
+    def extract_symbol(self, save = False, show = False):
+        if not hasattr(self, 'base_stats'):
+            self.flatten_image()
+        volumes = [self.base_stats[x]['volume'] for x in self.base_stats.keys() if type(self.base_stats[x]) == dict]
+        base_colors = list(self.base_stats.keys())[2:]
+        symbol_colors = list(value_sort(dict(zip(base_colors, volumes))).keys())
+        # print(self.num_symbols)
+        symbol_colors = symbol_colors[-1*(self.num_symbols):]
+        self.symbol_colors = symbol_colors
+        symbol_conversion = dict(zip(symbol_colors, [self.palette_matrix[x] for x in symbol_colors]))
+        symbol_stats = {}
+        for color in symbol_colors:
+            symbol_stats[color] = self.base_stats.pop(color)
+        self.symbol_stats = symbol_stats
+        img = self.flat_image
+        buffer = 0
+        x_buffer = 0
+        y_buffer = 0
+        for color in symbol_stats.keys():
+            ranges = []
+            ranges.append(symbol_stats[color]['range_y'])
+            ranges.append(symbol_stats[color]['range_x'])
+            buffer = max(ranges) * 0.1
+        img = img.crop((symbol_stats[color]['min_x'] - buffer, symbol_stats[color]['min_y'] - buffer , symbol_stats[color]['max_x'] + buffer, symbol_stats[color]['max_y'] + buffer))
+        symbol_position = (symbol_stats[color]['min_x'] - buffer, symbol_stats[color]['min_y'] - buffer)
+        self.symbol_position = symbol_position 
 
-    
+        for base, final in self.palette_matrix.items():
+            if base not in symbol_conversion.keys():
+                symbol_conversion[base] = (255, 255, 255, 0)
+        # img.show()
+        symbol_conversion[(0, 0, 0)] = (255, 255, 255, 0)
+        # print(symbol_conversion)
+        self.symbol_matrix = symbol_conversion
+        # print(symbol_conversion)
+        img = (pixel_replace(img, symbol_conversion, stats = False))
+        square = max(img.size)
+        # print(square)
+        background = Image.new('RGB', (square, square), (255, 255, 255, 0))
+        # background.show()
+        if img.size[0] ==  square:
+            background.paste(img, (0, int((square - img.size[1])/2)))
+            # print(background.size)
+            img = background
+            # background.show()
+        elif img.size[1]== square:
+            background.paste(img, (int((square - img.size[0])/2), 0))
+            # print(background.size)
+            img = background
+        img.resize((500, 500))
+        self.symbol_extract = img
+        if save:
+            filepath = 'flag_images/symbols/' + self.name + '_symbol.png'
+            img.save(filepath)
+        if show:
+            img.show()
+        return img
+
+    def extract_stencil(self, save = True):
+        if not hasattr(self, 'symbol_matrix'):
+            self.extract_symbol()
+        stencil_conversion = {}
+        for k, v in self.symbol_matrix.items():
+            if k in self.symbol_colors:
+                stencil_conversion[v] = (0,0,0)
+            else:
+                stencil_conversion[v] = (255, 255, 255)
+        if (255, 255, 255) not in stencil_conversion.keys():
+                stencil_conversion[255,255,255] = (255, 255, 255)
+
+        img = pixel_replace(self.symbol_extract, stencil_conversion)
+        img.show()
+
     def order_colors(self):
         '''
         Produces list of colors in correct order for palette
@@ -888,7 +991,7 @@ class Flag:
             for point in points:
                 new_points.append( (point[0] * width, point[1]* height))
             # print(new_points, color)
-            draw.polygon(new_points, fill =  color)
+            draw.polygon(new_points, fill =  color[0])
             # img.show()
             # input('x')
 
