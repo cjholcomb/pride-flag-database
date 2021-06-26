@@ -19,8 +19,9 @@ genderqueer|Doesn’t subscribe to conventional gender distinctions and identifi
 gynephilia|Attracted to women or femininity.|main|4|4|0|0|0
 intersex|Born with a reproductive or sexual anatomy that doesn’t fit the typical definitions of female or male|main|2|1|0|1|0
 lesbian_wlw|Homosexual woman. Recent variation|main|5|5|0|0|0
-lesbian(labrys)|Homosexual woman. |main|3|1|0|2|0
-lipstick-femme|Lesbian who favors glamorous or traditionally feminine style.|main|8|7|0|1|0
+lesbian_wlw_7-stripe|Homosexual woman. Recent variation|main|7|7|0|0|0
+labrys|Homosexual woman. |main|3|1|0|2|0
+lipstick|Lesbian who favors glamorous or traditionally feminine style.|main|8|7|0|1|0
 lithromantic|Romantic attraction toward others but only enjoys romantic relationships in theory. Also known as an akoiromantic or apromantic.|main|3|3|0|0|0
 mlm|Homosexual man. Recent Variation.|main|5|5|0|0|0
 mlm(7-stripe)|Homosexual man. Recent Variation.|main|7|7|0|0|0
@@ -41,26 +42,24 @@ transgender|Identifies as a gender that differs from the one assigned at birth.|
 trigender|experiencing exactly three gender identities either simultaneously or alternately.|main|3|5|0|0|0
 twink|Homosexual male with attractive, boyish qualities. |main|4|3|0|1|0
 twospirit|culturally distinct gender that describes Indigenous North Americans who fulfill one of many mixed gender roles found traditionally among many Native Americans and Canadian First Nations indigenous groups.|main|8|6|0|2|0
-fetish|Possesses a habitual erotic desire for an object, behavior, (nongential) part of the body, concept, or feeling.|fetish|4||||
-ageplay|fetish|fetish|5||||
+fetish|Possesses a habitual erotic desire for an object, behavior, (nongential) part of the body, concept, or feeling.|fetish|4|9|0|1|0
+ageplay|fetish|fetish|5|2|0|2|0
 bdsm|fetish|fetish|4|9|0|1|0
-boi|fetish|fetish|4||||
-boots|fetish|fetish|4||||
-fat|fetish|fetish|5||||
-fisting|fetish|fetish|2||||
-foot|fetish|fetish|4||||
-muscle|fetish|fetish|5||||
-freak|fetish|fetish|6||||
-goth|fetish|fetish|2||||
-leather|fetish|fetish|4||||
-Leather-girl|fetish|fetish|4||||
-Long-hair|fetish|fetish|10||||
-master-slave|fetish|fetish|2||||
-mask|fetish|fetish|4||||
-military|fetish|fetish|5||||
-ownership|fetish|fetish|3||||
-pony|fetish|fetish|4||||
-puppy|fetish|fetish|4||||
-rubber-latex|fetish|fetish|3||||
-tickle|fetish|fetish|3||||
-watersports|fetish|fetish|4||||
+boi|fetish|fetish|4|9|0|1|0
+boots|fetish|fetish|4|9|0|1|0
+fat|fetish|fetish|5|5|0|1|0
+fisting|fetish|fetish|2|7|0|0|0
+foot|fetish|fetish|4|9|0|1|0
+muscle|fetish|fetish|5|5|0|1|0
+goth|fetish|fetish|2|1|0|1|0
+leather|fetish|fetish|4|9|0|1|0
+leather-girl|fetish|fetish|4|9|0|1|0
+master-slave|fetish|fetish|2|1|0|1|0
+mask|fetish|fetish|4|9|0|1|0
+military|fetish|fetish|5|4|0|1|0
+ownership|fetish|fetish|3|9|0|1|0
+pony|fetish|fetish|4|5|0|1|0
+puppy|fetish|fetish|4|9|0|1|0
+latex|fetish|fetish|3|1|0|0|1
+tickle|fetish|fetish|3|9|0|1|0
+watersports|fetish|fetish|4|9|0|1|0

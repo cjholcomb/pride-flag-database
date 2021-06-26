@@ -432,6 +432,12 @@ class Flag:
         #establishes palette and sorts
         if self.name in basic_flags:
             palette_choices = list(basic_colors.values())
+        elif self.name == 'military':
+            palette_choices = [(0, 0, 0), (43, 93, 52), (44, 160, 44), (101, 116, 50), (252, 192, 6)]
+        elif self.name == 'pony':
+            palette_choices = [(0, 0, 0), (10, 95, 56), (255, 255, 255), (1, 103, 149)]
+        elif self.name == 'tickle':
+            palette_choices = [(0, 0, 0), (98, 65, 199), (254, 70, 165)]
         else:
             palette_choices = list(palette_lookup.keys())
         sorted_colors = list(value_sort(by_color).keys())
@@ -874,24 +880,24 @@ class Flag:
         '''
         
         #uses reconstruct method if flag is of appropriate type
-        if self.type in ('simple', 'mirrored'):
-            img = self.reconstruct()
-        else:
+        # if self.type in ('simple', 'mirrored'):
+        #     img = self.reconstruct()
+        # else:
         
             #runs methods to create needed attributes
-            if not hasattr(self, 'flat_image'):
-                self.flatten_image()
-            
-            #iterates through image, changing pixels
-            conversion = self.palette_matrix
-            img = self.flat_image.copy()
-            pixels = img.load()
-            for x in range(img.size[0]):
-                for y in range(img.size[1]):
-                    pixels[x, y] = conversion[pixels[x, y]]
-            
-            #writes image as attribute
-            self.final_image = img
+        if not hasattr(self, 'flat_image'):
+            self.flatten_image()
+        
+        #iterates through image, changing pixels
+        conversion = self.palette_matrix
+        img = self.flat_image.copy()
+        pixels = img.load()
+        for x in range(img.size[0]):
+            for y in range(img.size[1]):
+                pixels[x, y] = conversion[pixels[x, y]]
+        
+        #writes image as attribute
+        self.final_image = img
         
         #show and save
         if show:
@@ -1040,6 +1046,175 @@ class Flag:
 
         del draw
         return img
+
+def existing_data():
+    pride_data ={}
+    for pride_flag in main_flags:
+        flag = Flag(pride_flag)
+        pride_data[flag.name] ={}
+        df = flag.map_colors()
+        palette = flag.color_map['final_rgb']
+        pride_data[flag.name]['palette_rgb'] = list(palette)
+        pride_data[flag.name]['palette_name'] =  [palette_lookup[x] for x in palette]
+        pride_data[flag.name]['stripes'] = flag.num_stripes
+        pride_data[flag.name]['stripe_palette'] =  df[df['type'] == 'stripe']['final_rgb']
+        pride_data[flag.name]['stripes_dist'] =  flag.stripes_dist
+        pride_data[flag.name]['chevrons'] =  flag.num_chevrons
+        if hasattr(flag, 'chevron_dist'):
+            pride_data[flag.name]['chevrons_dist'] =  flag.chevrons_dist
+        else:
+            pride_data[flag.name]['chevrons_dist'] =  None
+        pride_data[flag.name]['chevron_palette'] =  list(df[df['type'] == 'chevron']['final_rgb'])
+        pride_data[flag.name]['symbols'] = flag.num_symbols
+        pride_data[flag.name]['symbol_palette'] =  list(df[df['type'] == 'symbol']['final_rgb'])
+    pride_data = swatch_exceptions(pride_data)
+    return pride_data
+
+def swatch_exceptions(dct):
+    print(dct.keys())
+    dct['androgynous']['palette_rgb'] = [(146, 149, 145), (102, 95, 209), (200, 117, 196)]
+    dct['androgynous']['palette_name'] =  [palette_lookup[x] for x in dct['androgynous']['palette_rgb']]
+
+    dct['asexual']['palette_rgb']
+    dct['asexual']['palette_rgb'] = [(0, 0, 0), (169, 169, 169), (255, 255, 255), (128, 0, 128)]
+    dct['asexual']['palette_name'] =  [palette_lookup[x] for x in dct['asexual']['palette_rgb']]
+
+    dct['bear']['palette_rgb'] = [(101, 55, 0), (202, 107, 2), (252, 225, 102), (255, 228, 181), (255, 255, 255), (83, 98, 103), (0, 0, 0), (0, 0, 0)]
+    dct['bear']['palette_name'] =  [palette_lookup[x] for x in dct['bear']['palette_rgb']]
+    dct['bear']['stripe_palette'] = [(101, 55, 0), (202, 107, 2), (252, 225, 102), (255, 228, 181), (255, 255, 255), (83, 98, 103), (0, 0, 0)]
+    dct['bear']['symbol_palette'] = [(0, 0, 0)]
+
+    dct['labrys']['palette_rgb'] = [(126, 30, 156), (0, 0, 0), (255, 255, 255)]
+    dct['labrys']['palette_name'] =  [palette_lookup[x] for x in dct['labrys']['palette_rgb']]
+    dct['labrys']['stripe_palette'] = [(126, 30, 156)]
+    dct['labrys']['symbol_palette'] = [(0, 0, 0), (255, 255, 255)]
+    
+    dct['lipstick']['palette_rgb'] = [(160, 2, 92), (164, 66, 160), (206, 93, 174), (255, 255, 255), (221, 160, 221), (207, 82, 78), (143, 20, 2), (253, 70, 89)]
+    dct['lipstick']['palette_name'] =  [palette_lookup[x] for x in dct['lipstick']['palette_rgb']]
+    dct['lipstick']['stripe_palette'] = [(160, 2, 92), (164, 66, 160), (206, 93, 174), (255, 255, 255), (221, 160, 221), (207, 82, 78), (143, 20, 2)]
+    dct['lipstick']['symbol_palette'] = [(253, 70, 89)]
+
+    dct['Qpoc']['palette_rgb'] = [(255, 228, 181), (222, 184, 135), (202, 107, 2), (139, 49, 3), (101, 55, 0), (52, 28, 2), (0,0,0)]
+    dct['Qpoc']['palette_name'] =  [palette_lookup[x] for x in dct['Qpoc']['palette_rgb']]
+    dct['Qpoc']['stripe_palette'] = [(255, 228, 181), (222, 184, 135), (202, 107, 2), (139, 49, 3), (101, 55, 0), (52, 28, 2)]
+    dct['Qpoc']['symbol_palette'] = [(0,0,0)]
+
+    dct['twospirit']['palette_rgb'] = [(229, 0, 0), (255, 140, 0), (254, 223, 8), (2, 143, 30), (6, 82, 255), (128, 0, 128), (255, 255, 255), (0,0,0)]
+    dct['twospirit']['palette_name'] =  [palette_lookup[x] for x in dct['twospirit']['palette_rgb']]
+    dct['twospirit']['stripe_palette'] = [(229, 0, 0), (255, 140, 0), (254, 223, 8), (2, 143, 30), (6, 82, 255), (128, 0, 128)]
+    dct['twospirit']['symbol_palette'] = [(255, 255, 255), (0,0,0)]
+
+    dct['fetish'] = {}
+    dct['fetish']['palette_rgb'] = [(0, 0, 0), (25, 25, 112), (0, 0, 0), (25, 25, 112), (255, 255, 255), (25, 25, 112), (0, 0, 0), (25, 25, 112), (0, 0, 0), (255, 0 ,0)]
+    dct['fetish']['palette_name'] =  [palette_lookup[x] for x in dct['fetish']['palette_rgb']]
+    dct['fetish']['stripe_palette'] = [(0, 0, 0), (25, 25, 112), (0, 0, 0), (25, 25, 112), (255, 255, 255), (25, 25, 112), (0, 0, 0), (25, 25, 112), (0, 0, 0)]
+    dct['fetish']['symbol_palette'] = [(255, 0 ,0)]
+
+    for fetish in ['bdsm', 'boots', 'foot', 'leather', 'mask', 'puppy']:
+        dct[fetish] =  dct['fetish']
+    
+    dct['ageplay'] = {}
+    dct['ageplay']['palette_rgb'] = [(123, 200, 246), (255, 178, 208), (214, 39, 40), (255, 255, 255), (0, 0, 0)]
+    dct['ageplay']['palette_name'] =  [palette_lookup[x] for x in dct['ageplay']['palette_rgb']]
+    dct['ageplay']['stripe_palette'] = [(123, 200, 246), (255, 178, 208)]
+    dct['ageplay']['symbol_palette'] = [(214, 39, 40), (255, 255, 255)]
+
+    dct['boi'] = {}
+    dct['boi']['palette_rgb'] = [(1, 160, 73), (0, 0, 0), (1, 160, 73), (0, 0, 0), (255, 255, 255),(0, 0, 0), (1, 160, 73), (0, 0, 0), (1, 160, 73), (214, 39, 40)]
+    dct['boi']['palette_name'] =  [palette_lookup[x] for x in dct['boi']['palette_rgb']]
+    dct['boi']['stripe_palette'] = [(1, 160, 73), (0, 0, 0), (1, 160, 73), (0, 0, 0), (255, 255, 255),(0, 0, 0), (1, 160, 73), (0, 0, 0), (1, 160, 73), (214, 39, 40)]
+    dct['boi']['symbol_palette'] = [(214, 39, 40)]
+    
+    dct['fat'] = {}
+    dct['fat']['palette_rgb'] = [(0, 0, 0), (212, 106, 126), (255, 252, 196), (103, 58, 63), (0, 0, 0), (255, 0, 0)]
+    dct['fat']['palette_name'] =  [palette_lookup[x] for x in dct['fat']['palette_rgb']]
+    dct['fat']['stripe_palette'] = [(0, 0, 0), (212, 106, 126), (255, 252, 196), (103, 58, 63), (0, 0, 0)]
+    dct['fat']['symbol_palette'] = [(255, 0, 0)]
+
+    dct['leather-girl'] = {}
+    dct['leather-girl']['palette_rgb'] = [(0, 0, 0), (200, 117, 196), (0, 0, 0), (200, 117, 196), (255, 255, 255), (200, 117, 196), (0, 0, 0), (200, 117, 196), (0, 0, 0), (255, 0 ,0)]
+    dct['leather-girl']['palette_name'] =  [palette_lookup[x] for x in dct['leather-girl']['palette_rgb']]
+    dct['leather-girl']['stripe_palette'] = [(0, 0, 0), (200, 117, 196), (0, 0, 0), (200, 117, 196), (255, 255, 255), (200, 117, 196), (0, 0, 0), (200, 117, 196), (0, 0, 0)]
+    dct['leather-girl']['symbol_palette'] = [(255, 0 ,0)]
+
+    dct['goth'] = {}
+    dct['goth']['palette_rgb'] = [(0, 0, 0), (72, 61, 139)]
+    dct['goth']['palette_name'] =  [palette_lookup[x] for x in dct['goth']['palette_rgb']]
+    dct['goth']['stripe_palette'] = [(0, 0, 0)]
+    dct['goth']['symbol_palette'] = [(72, 61, 139)]
+
+    dct['fisting'] = {}
+    dct['fisting']['palette_rgb'] = [(0, 0, 0), (247, 2, 42)]
+    dct['fisting']['palette_name'] =  [palette_lookup[x] for x in dct['fisting']['palette_rgb']]
+    dct['fisting']['stripe_palette'] = [(0, 0, 0), (247, 2, 42)]
+    dct['fisting']['symbol_palette'] = []
+
+    dct['master-slave'] = {}
+    dct['master-slave']['palette_rgb'] = [(0, 0, 0), (255, 0, 0)]
+    dct['master-slave']['palette_name'] =  [palette_lookup[x] for x in dct['master-slave']['palette_rgb']]
+    dct['master-slave']['stripe_palette'] = [(0, 0, 0)]
+    dct['master-slave']['symbol_palette'] = [(255, 0, 0)]
+
+    dct['military'] = {}
+    dct['military']['palette_rgb'] = [(0, 0, 0), (43, 93, 52), (44, 160, 44), (101, 116, 50), (252, 192, 6)]
+    dct['military']['palette_name'] =  [palette_lookup[x] for x in dct['military']['palette_rgb']]
+    dct['military']['stripe_palette'] = [(0, 0, 0), (43, 93, 52), (44, 160, 44), (101, 116, 50),]
+    dct['military']['symbol_palette'] = [(252, 192, 6)]
+
+    dct['muscle'] = {}
+    dct['muscle']['palette_rgb'] = [(103, 58, 63), (165, 42, 42), (203, 65, 107), (125, 127, 124), (0, 0, 0), (0, 0, 0)]
+    dct['muscle']['palette_name'] =  [palette_lookup[x] for x in dct['muscle']['palette_rgb']]
+    dct['muscle']['stripe_palette'] = [(103, 58, 63), (165, 42, 42), (203, 65, 107), (125, 127, 124), (0, 0, 0)]
+    dct['muscle']['symbol_palette'] = [(0, 0, 0)]
+
+    dct['ownership'] = {}
+    dct['ownership']['palette_rgb'] = [(0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 0, 0)]
+    dct['ownership']['palette_name'] =  [palette_lookup[x] for x in dct['ownership']['palette_rgb']]
+    dct['ownership']['stripe_palette'] = [(0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0), (255, 255, 255), (0, 0, 0)]
+    dct['ownership']['symbol_palette'] = [(255, 0, 0)]
+
+    dct['pony'] = {}
+    dct['pony']['palette_rgb'] = [(0, 0, 0), (255, 255, 255), (1, 103, 149), (255, 255, 255), (0, 0, 0), (10, 95, 56)]
+    dct['pony']['palette_name'] =  [palette_lookup[x] for x in dct['pony']['palette_rgb']]
+    dct['pony']['stripe_palette'] = [(0, 0, 0), (255, 255, 255), (1, 103, 149), (255, 255, 255), (0, 0, 0), (10, 95, 56)]
+    dct['pony']['symbol_palette'] = [(10, 95, 56)]
+
+    dct['latex'] = {}
+    dct['latex']['palette_rgb'] = [(0, 0, 0), (250, 194, 5), (214, 39, 40)]
+    dct['latex']['palette_name'] =  [palette_lookup[x] for x in dct['latex']['palette_rgb']]
+    dct['latex']['stripe_palette'] = [(0, 0, 0), (250, 194, 5), (214, 39, 40)]
+    dct['latex']['symbol_palette'] = []
+
+    dct['tickle'] = {}
+    dct['tickle']['palette_rgb'] = [(0, 0, 0), (98, 65, 199), (0, 0, 0), (98, 65, 199), (254, 70, 165), (98, 65, 199), (0, 0, 0), (98, 65, 199), (0, 0, 0), (254, 70, 165)]
+    dct['tickle']['palette_name'] =  [palette_lookup[x] for x in dct['tickle']['palette_rgb']]
+    dct['tickle']['stripe_palette'] = [(0, 0, 0), (98, 65, 199), (0, 0, 0), (98, 65, 199), (254, 70, 165), (98, 65, 199), (0, 0, 0), (98, 65, 199), (0, 0, 0)]
+    dct['tickle']['symbol_palette'] = [ (254, 70, 165)]
+
+    dct['lesbian_wlw_7-stripe'] = {}
+    dct['lesbian_wlw_7-stripe']['palette_rgb'] = [(236, 45, 1), (240, 131, 58), (255, 150, 79), (255, 255, 255), (206, 93, 174), (157, 87, 131), (160, 2, 92)]
+    dct['lesbian_wlw_7-stripe']['palette_name'] =  [palette_lookup[x] for x in dct['lesbian_wlw_7-stripe']['palette_rgb']]
+    dct['lesbian_wlw_7-stripe']['stripe_palette'] = [(236, 45, 1), (240, 131, 58), (255, 150, 79), (255, 255, 255), (206, 93, 174), (157, 87, 131), (160, 2, 92)]
+    dct['lesbian_wlw_7-stripe']['symbol_palette'] = []
+
+    dct['watersports'] = {}
+    dct['watersports']['palette_rgb'] = [(0, 0, 0), (25, 25, 112), (0, 0, 0), (25, 25, 112), (255, 255, 255), (25, 25, 112), (0, 0, 0),(25, 25, 112), (0, 0, 0), (213, 182, 10)]
+    dct['watersports']['palette_name'] =  [palette_lookup[x] for x in dct['watersports']['palette_rgb']]
+    dct['watersports']['stripe_palette'] = [(0, 0, 0), (25, 25, 112), (0, 0, 0), (25, 25, 112), (255, 255, 255), (25, 25, 112), (0, 0, 0),(25, 25, 112), (0, 0, 0)]
+    dct['watersports']['symbol_palette'] = [(213, 182, 10)]
+    
+    return dct
+
+def make_swatches(dct):
+    for flag in dct.keys():
+        color_swatch(dct[flag]['palette_rgb'], vertical=True, save = True, filepath= 'flag_images/palettes/' + flag +'_swatch.png')
+
+def extract_symbol(img, full_palette, symbol_palette):
+    conversion = dict(zip(list(full_palette), [x if x in symbol_palette else (255, 255, 255, 0)for x in full_palette]))
+    symbol, stats = pixel_replace(img, conversion, stats = True)
+    return symbol  
+
+
 
 if __name__ == '__main__':
     flag_data = pd.read_csv('flag_data.csv', sep = '|')
